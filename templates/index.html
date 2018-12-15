@@ -404,7 +404,7 @@
       <span class="head">{[ item.consign_name ]}</span>
       <span class="text">{[ item.desc ]}</span>
       <span class="time">{[ item.time ]}</span>
-      <span class="sc"><img src="static/imgs/已收藏.svg" class="sc1"/></span>
+      <span class="sc" @click="selectImg($event)"><img src="static/imgs/已收藏.svg" :id="item.consign_id"/></span>
       <div class="ns"></div>
       <div style="color: #ffffff">test</div>
     </div>
@@ -412,10 +412,10 @@
 </div>
 <div class="ques"></div>
 <div class="div_footer">
-  <span class="icon1"><a onclick="changeImg1()" href="/index"><img src="static/imgs/最新需求x.svg" class="icon_size" id="ico1"></a></span>
-  <span class="icon2"><a onclick="changeImg2()" href="/partition/1"><img src="static/imgs/失物招领.svg" class="icon_size" id="ico2"></a></span>
-  <span class="icon3"><a onclick="changeImg3()" href="/partition/2"><img src="static/imgs/快递代领.svg" class="icon_size" id="ico3"></a></span>
-  <span class="icon4"><a onclick="changeImg4()" href="/partition/3"><img src="static/imgs/二手交易.svg" class="icon_size" id="ico4"></a></span>
+  <span class="icon1"><a href="/index"><img src="static/imgs/最新需求x.svg" class="icon_size" id="ico1"></a></span>
+  <span class="icon2"><a href="/partition/1"><img src="static/imgs/失物招领.svg" class="icon_size" id="ico2"></a></span>
+  <span class="icon3"><a href="/partition/2"><img src="static/imgs/快递代领.svg" class="icon_size" id="ico3"></a></span>
+  <span class="icon4"><a href="/partition/3"><img src="static/imgs/二手交易.svg" class="icon_size" id="ico4"></a></span>
 </div>
 <div class="bgDiv"></div>
 <div class="leftNav">
@@ -423,7 +423,7 @@
     <img src="static/imgs/logo.jpg">
   </div>
   <p class="tips">
-  <pre class="tips_font"><h1 class="username">{{username}}</h1>
+  <pre class="tips_font"><h1 class="username">{{session.get('username')}}</h1>
     tips:点击需求卡片后的小星星,可
     以在已收藏中查看联系方式!
         </pre>
@@ -450,7 +450,7 @@
       <li class="li2">
         <img src="static/imgs/已发布.svg" class="icon_size2" style="margin-left:0.9rem"/>
         <div class="mading"style="margin-left: 0.37rem;margin-top:.25rem;">
-          <a href="/my_consign" style="color: #616161">
+          <a href="/history" style="color: #616161">
             已发布
           </a>
         </div>
@@ -484,21 +484,45 @@
               }
           },
           methods: {
-              getHomeInfo1() {
-                  var _this = this
-                  axios.get('/newest_consign')
-                      .then(this.getHomeInfoSucc1)
-              },
-              getHomeInfoSucc1(res) {
-                  console.log(res)
-                  this.iconList = res.data;
-                  if (this.iconList)
-                      this.isActive = true
-              }
+          getHomeInfo1() {
+            var _this = this
+            axios.get('/newest_consign')
+              .then(this.getHomeInfoSucc1)
           },
-          mounted() {
-              this.getHomeInfo1()
-          }
+          getHomeInfoSucc1(res) {
+            console.log(res)
+            this.iconList = res.data;
+            if (this.iconList)
+              this.isActive = true
+          },
+            selectImg(event) {
+              var x = event.target;
+              let y = x.id
+              var imgs =document.getElementById(y)
+              imgs.setAttribute("src", "static/imgs/已收藏x.svg");
+              var obj = document.getElementById(y);
+              axios.get('/add_collect/', {
+                params: { //请求参数
+                  'consign_id':y
+                }
+              }).then(function (response) {
+                console.log(response);//请求正确时执行的代码
+              }).catch(function (response) {
+                console.log(response);//发生错误时执行的代码
+              })
+            //   axios.get('http://101.132.107.146/add_collect/',
+            //     {data:{'id':y}
+            //   }).then(res => {
+            //       console.log(res)
+            //     })
+            //     .catch(err => {
+            //       console.log(err)
+            //     })
+            }
+        },
+        mounted() {
+          this.getHomeInfo1()
+        }
       });
   // }
   // }}
@@ -523,7 +547,7 @@
   //       methods: {
   //         getHomeInfo2() {
   //           var _this = this;
-  //           axios.get('http://101.132.107.146/get_list')
+  //           axios.get('/get_list')
   //             .then(this.getHomeInfoSucc2);
   //         },
   //         getHomeInfoSucc2(res) {
@@ -561,7 +585,7 @@
   //       methods: {
   //         getHomeInfo3() {
   //           var _this = this
-  //           axios.get('http://101.132.107.146/newest_consign')
+  //           axios.get('/newest_consign')
   //             .then(this.getHomeInfoSucc3)
   //         },
   //         getHomeInfoSucc3(res) {
@@ -598,7 +622,7 @@
   //       methods: {
   //         getHomeInfo4() {
   //           var _this = this
-  //           axios.get('http://101.132.107.146/newest_consign')
+  //           axios.get('/newest_consign')
   //             .then(this.getHomeInfoSucc4)
   //         },
   //         getHomeInfoSucc4(res) {

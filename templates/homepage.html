@@ -381,7 +381,7 @@
         <img src="imgs/logo.svg">
     </div>
     <p class="tips">
-    <h1 class="username">胡昊江</h1>
+    <h1 class="username">{{session.get('username')}}</h1>
     <pre class="tips_font">
 Tips：点击需求卡片上的小星星
 后可以在已收藏中查看TA的联系
@@ -401,7 +401,7 @@ Tips：点击需求卡片上的小星星
             <li class="li2">
                 <img src="imgs/已收藏.svg" class="icon_size2" style="margin-left:0.87rem"/>
                 <div class="mading"style="margin-left: 0.29rem;">
-                    <a href="collection.html" style="color: #616161">
+                    <a href="/collect" style="color: #616161">
                         已收藏
                     </a>
                 </div>
@@ -409,7 +409,7 @@ Tips：点击需求卡片上的小星星
             <li class="li2">
                 <img src="imgs/已发布.svg" class="icon_size2" style="margin-left:0.9rem"/>
                 <div class="mading"style="margin-left: 0.37rem;margin-top:.25rem;">
-                    <a href="#" style="color: #616161">
+                    <a href="/history" style="color: #616161">
                         已发布
                     </a>
                 </div>
@@ -417,7 +417,7 @@ Tips：点击需求卡片上的小星星
             <li class="li4">
                 <img src="imgs/退出.svg" class="icon_size2" style="margin-left:0.82rem"/>
                 <div class="mading" style="margin-left: 0.37rem;">
-                <a href="#" style="color: #616161">
+                <a href="/logout" style="color: #616161">
                     退 出
                 </a>
                 </div>

@@ -12,7 +12,6 @@ db = pymysql.connect("localhost", "user", "user", "db1")
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
-app.permanent_session_lifetime = timedelta(days=7)
 CORS(app, resources=r'/*')
 CORS(app, supports_credentials=True)
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -68,6 +67,7 @@ def login():
         # #form
         username = request.form.get('username')
         password = request.form.get('password')
+        check = request.form.get('checkbox')
         # 检查是否存在用户名和密码
         if not username or not password:
             cursor.close()
@@ -85,7 +85,8 @@ def login():
             session["user_id"] = user_id
             session["username"] = username
             cursor.close()
-            session.permanent = True
+            if check:
+                session.permanent = True
             return redirect(url_for('index'))
         else:
             cursor.close()
@@ -134,15 +135,6 @@ def signup():
         try:
             cursor.execute(sql)
             db.commit()
-            sql = "select user_id from users where username='%s' and `password`='%s'" % \
-                  (username, password)
-            cursor.execute(sql)
-            user_id = cursor.fetchall()[0][0]
-            # 储存user_id,用户名进入session
-            session["user_id"] = user_id
-            session["username"] = username
-            session.permanent = True
-            cursor.close()
             return redirect(url_for('index'))
         except:
             db.rollback()
@@ -229,7 +221,7 @@ def finish_change():
             })
         finally:
             cursor.close()
-            return redirect(url_for('history'))
+            return redirect(url_for('my_consign'))
     else:
         cursor.close()
         return jsonify({
@@ -254,14 +246,15 @@ def consign_delete():
         try:
             cursor.execute(sql)
             db.commit()
+
         except:
             db.rollback()
-            cursor.close()
             return jsonify({
                 "status": 0,
                 "message": "删除错误！"
             })
-
+        finally:
+            cursor.close()
     else:
         cursor.close()
         return jsonify({
@@ -271,10 +264,11 @@ def consign_delete():
 
 
 # 已发布
-@app.route('/history', methods=["GET"])
+@app.route('/my_consign', methods=["GET"])
 @login_required
-def history():
-    return render_template('history.html')
+def my_consign():
+
+    return render_template('my_consign.html')
 
 
 # 获取已发布
@@ -327,47 +321,11 @@ def consign_collect(consign_id):
         })
 
 
-# 收藏添加
-@app.route('/add_collect/', methods=["GET"])
-@login_required
-def add_collect():
-    cursor = db.cursor()
-    consign_id = int(str(request.args.get('consign_id'))[:-1])
-    # print(consign_id)
-    # user_id = 5
-    user_id=session.get('user_id')
-    sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, consign_id)
-    results = cursor.execute(sql)
-    if results:
-        return jsonify({
-            "status": 0,
-            "message": "该委托已被收藏！"
-        })
-    else:
-        sql = """INSERT INTO collects(user_id,consign_id)
-                             VALUES ('%s', '%s')""" % (user_id, consign_id)
-        try:
-            cursor.execute(sql)
-            db.commit()
-            cursor.close()
-            return jsonify({
-                "status": 1,
-                "message": "添加成功！"
-            })
-        except:
-            db.rollback()
-            cursor.close()
-            return jsonify({
-                "status": 0,
-                "message": "添加错误！"
-            })
-
-
 # 收藏页面获取
-@app.route('/collection', methods=["GET"])
+@app.route('/collect', methods=["GET"])
 @login_required
 def collect():
-    return render_template('collection.html')
+    return render_template('collect.html')
 
 
 # 获取收藏
@@ -382,22 +340,17 @@ def get_collect():
     if results:
         results = cursor.fetchall()
         for result in results:
-            print(result)
             cache = {}
             cache["collect_id"] = result[0]
             cache["consign_id"] = result[2]
             consign_id = result[2]
-            # print(consign_id)
-            # print("#############################")
-            sql = "select * from consigns where consign_id='%s' and user_id='%s' " \
-                  % (consign_id, user_id)
+            sql = "select * from consigns where user_id='%s' and consign_id='%s'" \
+                  % (user_id, consign_id)
             cursor.execute(sql)
             consign = cursor.fetchall()
-            print(consign)
-            print("#############################")
-            cache['consign_name'] = consign[0][3]
-            cache['desc'] = consign[0][4]
-            cache['contact'] = consign[0][6]
+            cache['consign_name'] = consign[3]
+            cache['desc'] = consign[4]
+            cache['contact'] = result[6]
             Time = str(consign[0][5])[:-3]
             cache["time"] = time.strftime("%Y/%m/%d %H:%M", time.strptime(Time, '%Y-%m-%d %H:%M'))
             output.append(cache)
@@ -427,7 +380,7 @@ def collect_delete():
             cursor.close()
             return jsonify({
                 "status": 1,
-                "message": "收藏成功！"
+                "message": "收藏删除成功！"
             })
         except:
             db.rollback()
@@ -460,10 +413,9 @@ def search(search_str):
 
 # 搜索功能
 @app.route('/Search/<search_str>', methods=["GET"])
-@login_required
+# @login_required
 def Search(search_str):
     cursor = db.cursor()
-    user_id = session.get('user_id')
     search_str = str(search_str)
     search_list = search_str.split()
     output = []
@@ -478,18 +430,12 @@ def Search(search_str):
         else:
             Cache += results[:]
     for val in Cache:
-        cache = {}
+        cache={}
         cache['consign_id'] = val[0]
         cache['consign_name'] = val[3]
         cache['desc'] = val[4]
         Time = str(val[5])[:-3]
         cache['time'] = time.strftime("%Y/%m/%d %H:%M", time.strptime(Time, '%Y-%m-%d %H:%M'))
-        sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, cache['consign_id'])
-        sql = cursor.execute(sql)
-        if sql:
-            cache['collected'] = 1
-        else:
-            cache['collected'] = 0
         output.append(cache)
     cursor.close()
     print(output)
@@ -498,27 +444,21 @@ def Search(search_str):
 
 # 最新委托
 @app.route('/newest_consign', methods=["GET"])
-@login_required
+# @login_required
 def new_consign():
     cursor = db.cursor()
-    user_id = session.get('user_id')
     sql = "select * from consigns where finished=0 order by `time` desc limit 12"
     cursor.execute(sql)
     results = cursor.fetchall()
     output = []
     for result in results:
         cache = {}
-        cache['consign_id'] = str(result[0]) + '_'
+        cache['consign_id'] = str(result[0])+'_'
         cache['consign_name'] = result[3]
         cache['desc'] = result[4]
         Time = str(result[5])[:-3]
         cache['time'] = time.strftime("%Y/%m/%d %H:%M", time.strptime(Time, '%Y-%m-%d %H:%M'))
-        sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, cache['consign_id'])
-        sql = cursor.execute(sql)
-        if sql:
-            cache['collected'] = 1
-        else:
-            cache['collected'] = 0
+        # cache['time'] = str(result[5])
         output.append(cache)
     cursor.close()
     return jsonify(output)
@@ -529,7 +469,6 @@ def new_consign():
 @login_required
 def partition(partition_num):
     cursor = db.cursor()
-    user_id = session.get('user_id')
     sql = "select * from consigns where `partition`='%s' order by `time` desc" % (partition_num)
     results = cursor.execute(sql)
     output = []
@@ -543,12 +482,6 @@ def partition(partition_num):
             Time = str(result[5])[:-3]
             cache['time'] = time.strftime("%Y/%m/%d %H:%M", time.strptime(Time, '%Y-%m-%d %H:%M'))
             # cache['time'] = str(result[5])
-            sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, cache['consign_id'])
-            sql = cursor.execute(sql)
-            if sql:
-                cache['collected'] = 1
-            else:
-                cache['collected'] = 0
             output.append(cache)
         cursor.close()
         return jsonify(output)
@@ -562,6 +495,41 @@ def partition(partition_num):
 @login_required
 def get_partition(n):
     return render_template("partition_{}.html".format(n))
+
+
+# 测试区#######
+@app.route('/get_list')
+def get_list():
+    Cursor_ = db.cursor()
+    sql = "select * from users"
+    Cursor_.execute(sql)
+    results = list(Cursor_.fetchall())
+    output = []
+    for result in results:
+        cache = {}
+        cache["user_id"] = result[0]
+        cache["username"] = result[1]
+        output.append(cache)
+    Cursor_.close()
+    return jsonify(output)
+
+
+@app.route('/get_dict')
+def get_dict():
+    Cursor_ = db.cursor()
+    sql = "select * from users"
+    Cursor_.execute(sql)
+    results = list(Cursor_.fetchall())
+    output = {}
+    n = 0
+    for result in results:
+        cache = {}
+        cache["user_id"] = str(result[0])+'_'
+        cache["username"] = result[1]
+        output[str(n)+'_'] = cache
+        n += 1
+    Cursor_.close()
+    return jsonify(output)
 
 
 if (__name__ == '__main__'):

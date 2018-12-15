@@ -266,10 +266,10 @@
 <div class="cc" id="app">
         <div class="bg" v-bind:class="isActive" v-for="item in iconList">
             <div class="des">
-                <div class="title">{{ item.consign_name }}</div>
-                <div class="text">{{ item.desc }}</div>
+                <div class="title">{[ item.consign_name ]}</div>
+                <div class="text">{[ item.desc ]}</div>
                 <div class="tl">
-                    <span class="time">{{ item.time }}</span>
+                    <span class="time">{[ item.time ]}</span>
                     <span class="lx">联系方式</span>
                 </div>
             </div>
@@ -284,7 +284,7 @@
         <img src="static/imgs/logo.jpg">
     </div>
     <p class="tips">
-    <pre class="tips_font"><h1 class="username">胡昊江</h1>
+    <pre class="tips_font"><h1 class="username">{{session.get('username')}}</h1>
     tips:点击需求卡片后的小星星,可
     以在已收藏中查看联系方式!
         </pre>
@@ -294,7 +294,7 @@
             <li class="li2">
                 <img src="static/imgs/首页.svg" class="icon_size2" style="margin-left: .87rem"/>
                 <div class="mading" style="margin-left: .33rem">
-                    <a style="color: #616161">
+                    <a href="/" style="color: #616161">
                         首页
                     </a>
                 </div>
@@ -303,7 +303,7 @@
                 <div class="bb"></div>
                 <img src="static/imgs/已收藏1.svg" class="icon_size2" style="margin-left:0.73rem"/>
                 <div class="mading" style="margin-left: 0.29rem;">
-                    <a href="collection.html" style="color: #616161">
+                    <a href="/collect" style="color: #616161">
                         已收藏
                     </a>
                 </div>
@@ -311,7 +311,7 @@
             <li class="li2">
                 <img src="static/imgs/已发布.svg" class="icon_size2" style="margin-left:0.9rem"/>
                 <div class="mading" style="margin-left: 0.37rem;margin-top:.25rem;">
-                    <a href="#" style="color: #616161">
+                    <a href="/history" style="color: #616161">
                         已发布
                     </a>
                 </div>
@@ -319,13 +319,14 @@
         </ul>
     </div>
     <div class="li4">
-        <span><pre class="font"><a href="login.html"><img src="static/imgs/退出.svg" class="icon_size3"/>   退出</pre>
+        <span><pre class="font"><a href="/logout"><img src="static/imgs/退出.svg" class="icon_size3"/>   退出</pre>
             </a>
         </span>
     </div>
 </div>
 <script>
   new Vue({
+      delimiters: ['{[', ']}'],
     el: "#app",
     data() {
       return {
@@ -336,7 +337,7 @@
     methods: {
       getHomeInfo() {
         var _this = this
-        axios.get('http://101.132.107.146/newest_consign')
+        axios.get('/get_collect')
           .then(this.getHomeInfoSucc)
       },
       getHomeInfoSucc(res) {

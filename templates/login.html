@@ -15,12 +15,10 @@
         }
 
         .logo img {
-            width: 2rem;
-            height: 2rem;
-            margin-top: 2.775rem;
-            box-shadow: 0 3px 12px #3c9af2;
-            opacity: 0.8;
-        }
+      text-align: center;
+      margin-top: 114px;
+    }
+
 
         .sign-up-input {
             margin-top: .925rem;
@@ -137,9 +135,11 @@
     </style>
 </head>
 <body>
-<div class="logo">
-    <p style="text-align: center"><img src="static/imgs/logo1.jpg" alt="图片加载失败"></p>
-</div>
+<div style="position: absolute;height:640px;width: 360px;text-align: center">
+  <div class = "logo">
+    <p style = "text-align: center"><img src = "static/imgs/Needing.png" alt = "图片加载失败"></p>
+  </div>
+
 <form action="/login" method="post">
     <p class="input-p"><input type="text" name="username" class="sign-up-input" placeholder="    用户名"
                               style="border: none"></p>
