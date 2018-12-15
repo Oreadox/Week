@@ -135,6 +135,7 @@ def signup():
         try:
             cursor.execute(sql)
             db.commit()
+            cursor.close()
             return redirect(url_for('index'))
         except:
             db.rollback()
@@ -246,15 +247,14 @@ def consign_delete():
         try:
             cursor.execute(sql)
             db.commit()
-
         except:
             db.rollback()
+            cursor.close()
             return jsonify({
                 "status": 0,
                 "message": "删除错误！"
             })
-        finally:
-            cursor.close()
+
     else:
         cursor.close()
         return jsonify({
@@ -318,6 +318,42 @@ def consign_collect(consign_id):
             "status": 0,
             "message": "该委托未被收藏！"
         })
+
+
+# 收藏添加
+@app.route('/add_collect', methods=["GET"])
+# @login_require
+def add_collect():
+    cursor = db.cursor()
+    consign_id = int(str(request.args.get('consign_id'))[-3:-1])
+    # print(consign_id)
+    user_id = 5
+    # user_id=session.get('user_id')
+    sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, consign_id)
+    results = cursor.execute(sql)
+    if results:
+        return jsonify({
+            "status": 0,
+            "message": "该委托已被收藏！"
+        })
+    else:
+        sql = """INSERT INTO collects(user_id,consign_id)
+                             VALUES ('%s', '%s')""" % (user_id, consign_id)
+        try:
+            cursor.execute(sql)
+            db.commit()
+            cursor.close()
+            return jsonify({
+                "status": 1,
+                "message": "添加成功！"
+            })
+        except:
+            db.rollback()
+            cursor.close()
+            return jsonify({
+                "status": 0,
+                "message": "添加错误！"
+            })
 
 
 # 收藏页面获取
@@ -429,7 +465,7 @@ def Search(search_str):
         else:
             Cache += results[:]
     for val in Cache:
-        cache={}
+        cache = {}
         cache['consign_id'] = val[0]
         cache['consign_name'] = val[3]
         cache['desc'] = val[4]
@@ -452,7 +488,7 @@ def new_consign():
     output = []
     for result in results:
         cache = {}
-        cache['consign_id'] = result[0]
+        cache['consign_id'] = str(result[0]) + '_'
         cache['consign_name'] = result[3]
         cache['desc'] = result[4]
         Time = str(result[5])[:-3]
@@ -494,41 +530,6 @@ def partition(partition_num):
 @login_require
 def get_partition(n):
     return render_template("partition_{}.html".format(n))
-
-
-# 测试区#######
-@app.route('/get_list')
-def get_list():
-    Cursor_ = db.cursor()
-    sql = "select * from users"
-    Cursor_.execute(sql)
-    results = list(Cursor_.fetchall())
-    output = []
-    for result in results:
-        cache = {}
-        cache["user_id"] = result[0]
-        cache["username"] = result[1]
-        output.append(cache)
-    Cursor_.close()
-    return jsonify(output)
-
-
-@app.route('/get_dict')
-def get_dict():
-    Cursor_ = db.cursor()
-    sql = "select * from users"
-    Cursor_.execute(sql)
-    results = list(Cursor_.fetchall())
-    output = {}
-    n = 0
-    for result in results:
-        cache = {}
-        cache["user_id"] = result[0]
-        cache["username"] = result[1]
-        output[n] = cache
-        n += 1
-    Cursor_.close()
-    return jsonify(output)
 
 
 if (__name__ == '__main__'):
