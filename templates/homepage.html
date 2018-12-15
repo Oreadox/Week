@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta name="viewport" content="width=360px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        /*a:active{*/
+        /*-webkit-tap-highlight-color: #ffffff;*/
+        /*}*/
+        a:link {
+            text-decoration: none;
+        }
+        .bluebar{
+            height: 0.525rem;
+            background-color: #45ccfe;
+        }
+        .bgDiv {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: .5;
+            position: fixed;
+            display: none;
+            z-index: 99;
+            bottom: 0;
+        }
+
+        .leftNav {
+            width: 67%;
+            max-width: 1000px;
+            height: 100%;
+            background-color: #ffffff;
+            /*左划菜单实现*/
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: -67%;
+        }
+
+        input::-ms-input-placeholder {
+            font-family: PingFangSC-Light, Microsoft YaHei UI;
+            font-size: 0.42rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: #ffffff;
+        }
+
+        input::-webkit-input-placeholder {
+            font-family: PingFangSC-Light, Microsoft YaHei UI;
+            font-size: 0.42rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: #ffffff;
+        }
+
+        .rectangle {
+            width: 100%;
+            height: 4.025rem;
+            background-image: linear-gradient(145deg,
+            #0aacfb 0%,
+            #72e4ff 100%);
+        }
+
+        .needing {
+            /*width: 121px;*/
+            /*height: 45px;*/
+            display: inline-block;
+            margin-top: .85rem;
+            margin-left: .6rem;
+            font-family: PingFangSC-Semibold;
+            font-size: 32px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: -0.77px;
+            color: #ffffff;
+        }
+
+        .new_need {
+            /*width: 1.925rem;*/
+            /*height: 0.625rem;*/
+            float: right;
+            margin-top: 1.2rem;
+            margin-right: .6rem;
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.45rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.028rem;
+            color: #ffffff;
+        }
+
+        .the_right {
+            vertical-align: center;
+            margin-top: .55rem;
+        }
+
+        .the_right img {
+            /*margin: auto;*/
+            /*vertical-align: center;*/
+            height: .5rem;
+        }
+
+        .line1 {
+            margin-top: .55rem;
+            width: .525rem;
+            height: .075rem;
+            background: #ffffff;
+            border-width: 0;
+        }
+
+        .line2 {
+            margin-top: .175rem;
+            width: .325rem;
+            height: .05rem;
+            background: #ffffff;
+            border-width: 0;
+        }
+
+        .line3 {
+            margin-top: .175rem;
+            width: .525rem;
+            height: .05rem;
+            background: #ffffff;
+            border-width: 0;
+        }
+
+        .toolbar {
+            display: inline-flex;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12.15rem;
+            /*margin-bottom: 1rem;*/
+            background-color: #ffffff;
+            box-shadow: 0rem -0.1rem 0.25rem 0rem rgba(203, 203, 203, 0.26);
+            border: solid 0rem #9a9a9a;
+        }
+
+        .icon1 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            margin-left: 10.333%;
+            margin-top: .375rem;
+        }
+
+        .icon2 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            /*margin-left: 12.77777%;*/
+            margin-top: .375rem;
+        }
+
+        .icon3 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            /*margin-left: 12.77777%;*/
+            margin-top: .375rem;
+        }
+
+        .icon4 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            /*margin-left: 12.77777%;*/
+            margin-top: .375rem;
+            margin-right: 10.3333%;
+        }
+
+        .search {
+            display: inline-block;
+            margin-left: .475rem;
+            width: 4.25rem;
+            height: .6rem;
+            background-color: #85dcfe;
+            background-image: url(imgs/放大镜.svg);
+            background-repeat: no-repeat;
+            background-position: 7%;
+            border-radius: 0.388rem;
+            border: none;
+            font-family: PingFangSC-Light, Microsoft YaHei UI;
+            font-size: 0.35rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+
+        .send {
+            float: right;
+            margin-top: rem;
+            margin-right: .6rem;
+            width: 2.9rem;
+            height: 0.625rem;
+            background-color: #95e5fe;
+            border-radius: 0.388rem;
+            border: 0;
+            /*font-family: PingFangSC-Light;*/
+            /*font-size: 0.35rem;*/
+            /*font-weight: normal;*/
+            /*font-stretch: normal;*/
+            /*letter-spacing: 0.03rem;*/
+            /*color: rgba(46, 46, 46, 0.5);*/
+        }
+
+        /*.logo{*/
+        /*}*/
+        .logo {
+            text-align: center;
+        }
+        .logo img {
+            width: 1.475rem;
+            height: 1.475rem;
+            margin-top: 1.175rem;
+        }
+
+        .tips {
+            margin-top: .55rem;
+        }
+
+        .tips_font {
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.3rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.028rem;
+            color: #b8b8b8;
+            text-align: center;
+        }
+
+        .func {
+            margin-top: .9rem;
+            margin-bottom: 4.2rem;
+        }
+
+        .li1 {
+            width: 100%;
+            height: 1.075rem;
+            /*vertical-align: middle;*/
+            /*display: table-cell;*/
+            /*text-align: center;*/
+            margin-bottom: .1rem;
+            background-color: #f0f0f0;
+
+        }
+        .li2 {
+            width: 100%;
+            height: 1.075rem;
+            /*vertical-align: middle;*/
+            /*display: table-cell;*/
+            /*text-align: center;*/
+            margin-bottom: .1rem;
+            background-color: #FFFEFD;
+
+        }
+        .li4 {
+            /*display: block;*/
+            /*display: inline-block;*/
+            /*margin-top：9rem;*/
+            width: 100%;
+            height: 1.075rem;
+            position: fixed;
+            bottom: 0;
+            margin-bottom: .325rem;
+        }
+        .username {
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.625rem;
+            color: #616161;
+            margin-bottom: .5rem;
+            text-align: center;
+            letter-spacing: 0.07rem;
+        }
+        .signout {
+            width: 1.2rem;
+            height: 1.025rem;
+            float: left;
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            line-height: 1.025rem;
+            letter-spacing: 0.069rem;
+            color: #616161;
+            margin-left: .3rem;
+        }
+
+        .the_right img {
+            vertical-align: top;
+        }
+
+        .div_footer {
+            display: inline-flex;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 1.525rem;
+            background-color: #f2f2f2;
+            /*margin-left: -27px;*/
+            /*margin-right: -27px;*/
+            /*padding: 0;*/
+            background-color: #ffffff;
+            box-shadow: 0rem -0.1rem 0.25rem 0rem rgba(203, 203, 203, 0.26);
+            border: solid 0rem #9a9a9a;
+        }
+        .font {
+            /*width: 1.2rem;*/
+            /*height: 1.025rem;*/
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.4rem;
+            font-weight: normal;
+            font-stretch: normal;
+            /*line-height: 1.025rem;*/
+            letter-spacing: 0.035rem;
+            color: #616161;
+        }
+        .bb{
+            width: 0.125rem;
+            height: 1.075rem;
+            background-color: #24bafc;
+            float: left;
+            maigin-top:1rem;
+
+        }
+        .icon_size2{
+            float: left;
+            margin-left: 0.7845rem;
+            margin-top: 0.3rem;
+        }
+        .mading{
+            font-family: PingFangSC-Medium;
+            font-color:#616161;
+            letter-spacing: 0.035rem;
+            float: left;
+            margin-left: 0.31rem;
+            margin-top: 0.26rem;
+            font-size: .4rem;
+        }
+        .icon_size{
+            width: 0.925rem;
+            height:0.85rem;
+        }
+        </style>
+    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/nav.js"></script>
+</head>
+<body>
+<div class="rectangle">
+    <span class="needing">Needing</span>
+    <span class="new_need"><b>最新需求</b></span>
+    <div class="the_right">
+        <img src="imgs/右边.svg" class="left">
+        <span><a href="search.html"><input type="button" class="search"></a></span>
+        <span><input type="button" style="color: #ffffff" value=" 发布需求" class="send"/></span>
+    </div>
+</div>
+<div class="div_footer">
+    <span class="icon1"><img src="imgs/最新需求x.svg" class="icon_size"></span>
+    <span class="icon2"><img src="imgs/失物招领.svg" class="icon_size"></span>
+    <span class="icon3"><img src="imgs/快递代领.svg" class="icon_size"> </span>
+    <span class="icon4"><img src="imgs/二手交易.svg" class="icon_size"> </span>
+</div>
+<div class="bgDiv"></div>
+<div class="leftNav">
+    <div class="bluebar">
+    </div>
+    <div class="logo">
+        <img src="imgs/logo.svg">
+    </div>
+    <p class="tips">
+    <h1 class="username">胡昊江</h1>
+    <pre class="tips_font">
+Tips：点击需求卡片上的小星星
+后可以在已收藏中查看TA的联系
+方式。</pre>
+    </p>
+    <div class="func">
+        <ul>
+            <li class="li1">
+                <div class="bb"></div>
+                <img src="imgs/首页.svg" class="icon_size2">
+                <div class="mading">
+                    <a style="color: #616161">
+                        首页
+                    </a>
+                </div>
+            </li>
+            <li class="li2">
+                <img src="imgs/已收藏.svg" class="icon_size2" style="margin-left:0.87rem"/>
+                <div class="mading"style="margin-left: 0.29rem;">
+                    <a href="collection.html" style="color: #616161">
+                        已收藏
+                    </a>
+                </div>
+            </li>
+            <li class="li2">
+                <img src="imgs/已发布.svg" class="icon_size2" style="margin-left:0.9rem"/>
+                <div class="mading"style="margin-left: 0.37rem;margin-top:.25rem;">
+                    <a href="#" style="color: #616161">
+                        已发布
+                    </a>
+                </div>
+            </li>
+            <li class="li4">
+                <img src="imgs/退出.svg" class="icon_size2" style="margin-left:0.82rem"/>
+                <div class="mading" style="margin-left: 0.37rem;">
+                <a href="#" style="color: #616161">
+                    退 出
+                </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+        </span>
+        <!--<span class = "signout"><pre>        退出</pre></span>-->
+    </div>
+</div>
+</body>
+</html>

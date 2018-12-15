@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>收藏</title>
+    <link rel = "stylesheet">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <style>
+        .rectangle {
+            width: 100%;
+            height: 1.675rem;
+            display: flex;
+            background-image: linear-gradient(143deg, #009dff 0%, #00dfff 100%);
+        }
+        .send{
+            width: 1.925rem;
+            height: .625rem;
+            font-family: PingFangSC-Semibold;
+            font-size: 0.45rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.025rem;
+            color: #ffffff;
+            float: left;
+            margin-right: .6rem;
+            flex: 1;
+            text-align: center;
+            margin-top: 0.725rem;
+        }
+        .right{
+            height: 1.675rem;
+            width: .6rem;
+            float: left;
+        }
+        .right img{
+            margin-top: 0.8rem;
+        }
+        .cc{
+            /*margin-top: .475rem;*/
+        }
+        .bg{
+            display: block;
+            width: 7.7rem;
+            height: 2.85rem;
+            background-color: #fdfeff;
+            box-shadow: 0rem 0.05rem 0.15rem 0rem
+            rgba(0, 0, 0, 0.13);
+            border-radius: 0.325rem;
+
+        }
+        .des{
+            margin-top: .65rem;
+        }
+        .dd{
+            display: inline-flex;
+            display: flex;
+            justify-content: space-around;
+        }
+        .title{
+            display: inline-block;
+            margin-top: .25rem;
+            margin-left: .3rem;
+            width: 6.675rem;
+            height: 0.675rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.35rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.02rem;
+            color: #2e2e2e;
+            margin-bottom: .1rem;
+        }
+        .text{
+            /*display: inline-block;*/
+            margin-left: .3rem;
+            width: 7.1rem;
+            height: 1.075rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.014rem;
+            color: #7a7a7a;
+            margin-bottom: .225rem;
+        }
+        .time{
+            margin-left: .3rem;
+            width: 3.325rem;
+            height: 0.15rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0.15rem;
+            letter-spacing: 0.008rem;
+            color: #c6c6c6;
+        }
+        .lx{
+            margin-right: .3rem;
+            margin-top: .225rem;
+            width: 3.125rem;
+            height: 0.15rem;
+            font-family: PingFangSC-Regular;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0.15rem;
+            letter-spacing: 0.008rem;
+            color: #1ab5fc;
+            float: right;
+        }
+        .tl{
+            /*display: inline-flex;*/
+            /*display: flex;*/
+            /*justify-content: space-around;*/
+        }
+        .logo {
+            text-align: center;
+        }
+
+        .logo img {
+            width: 2.475rem;
+            height: 2.475rem;
+            margin-top: 1.175rem;
+        }
+        .tips {
+            margin-top: .5rem;
+        }
+        .tips_font {
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.028rem;
+            color: #b8b8b8;
+            text-align: center;
+        }
+
+        .tips {
+            margin-top: .5rem;
+        }
+
+        .tips_font {
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.028rem;
+            color: #b8b8b8;
+            text-align: center;
+        }
+
+        .li1 {
+            width: 100%;
+            height: 1.075rem;
+            margin-bottom: .1rem;
+            background-color: #f0f0f0;
+        }
+        .li4 {
+            position: fixed;
+            bottom: 0;
+            margin-bottom: .625rem;
+        }
+
+        .li4 img {
+            margin-left: .975rem;
+        }
+        .bgDiv {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: .5;
+            position: fixed;
+            display: none;
+            z-index: 99;
+            bottom: 0;
+        }
+
+        .leftNav {
+            width: 67%;
+            max-width: 1000px;
+            height: 100%;
+            background-color: #ffffff;
+            /*左划菜单实现*/
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: -67%;
+        }
+        .icon_size2 {
+            float: left;
+            margin-left: 0.7845rem;
+            margin-top: 0.3rem;
+        }
+        .bb{
+            width: 0.125rem;
+            height: 1.075rem;
+            background-color: #24bafc;
+            float: left;
+            maigin-top:1rem;
+        }
+        .mading{
+            font-family: PingFangSC-Medium;
+            font-color:#616161;
+            letter-spacing: 0.035rem;
+            float: left;
+            margin-left: 0.31rem;
+            margin-top: 0.26rem;
+            font-size: .4rem;
+        }
+        .li4 {
+            width: 100%;
+            height: 1.075rem;
+            position: fixed;
+            bottom: 0;
+            margin-bottom: .325rem;
+        }
+        .font {
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.4rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.035rem;
+            color: #616161;
+        }
+        .li2 {
+            width: 100%;
+            height: 1.075rem;
+            margin-bottom: .1rem;
+            background-color: #FFFEFD;
+        }
+        .username {
+            display: block;
+            display: inline-block;
+            text-align: center;
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: 0.625rem;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #616161;
+            margin-bottom: .6rem;
+        }
+        .func {
+            margin-top: .9rem;
+            margin-bottom: 4.2rem;
+        }
+    </style>
+    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+    <script src="static/js/jquery-2.1.1.min.js"></script>
+    <script src="static/js/nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+</head>
+<body>
+<div class = "rectangle">
+    <div class="right">
+        <img class="left" src = "static/imgs/右边.svg">
+    </div>
+    <div class="send">收藏</div>
+</div>
+<div class="dd">
+<div class="cc" id="app">
+        <div class="bg" v-bind:class="isActive" v-for="item in iconList">
+            <div class="des">
+                <div class="title">{{ item.consign_name }}</div>
+                <div class="text">{{ item.desc }}</div>
+                <div class="tl">
+                    <span class="time">{{ item.time }}</span>
+                    <span class="lx">联系方式</span>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+</div>
+<div class="bgDiv"></div>
+<div class="leftNav">
+    <div class="logo">
+        <img src="static/imgs/logo.jpg">
+    </div>
+    <p class="tips">
+    <pre class="tips_font"><h1 class="username">胡昊江</h1>
+    tips:点击需求卡片后的小星星,可
+    以在已收藏中查看联系方式!
+        </pre>
+    </p>
+    <div class="func">
+        <ul>
+            <li class="li2">
+                <img src="static/imgs/首页.svg" class="icon_size2" style="margin-left: .87rem"/>
+                <div class="mading" style="margin-left: .33rem">
+                    <a style="color: #616161">
+                        首页
+                    </a>
+                </div>
+            </li>
+            <li class="li1">
+                <div class="bb"></div>
+                <img src="static/imgs/已收藏1.svg" class="icon_size2" style="margin-left:0.73rem"/>
+                <div class="mading" style="margin-left: 0.29rem;">
+                    <a href="collection.html" style="color: #616161">
+                        已收藏
+                    </a>
+                </div>
+            </li>
+            <li class="li2">
+                <img src="static/imgs/已发布.svg" class="icon_size2" style="margin-left:0.9rem"/>
+                <div class="mading" style="margin-left: 0.37rem;margin-top:.25rem;">
+                    <a href="#" style="color: #616161">
+                        已发布
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="li4">
+        <span><pre class="font"><a href="login.html"><img src="static/imgs/退出.svg" class="icon_size3"/>   退出</pre>
+            </a>
+        </span>
+    </div>
+</div>
+<script>
+  new Vue({
+    el: "#app",
+    data() {
+      return {
+        iconList: [],
+        isActive: '',
+      }
+    },
+    methods: {
+      getHomeInfo() {
+        var _this = this
+        axios.get('http://101.132.107.146/newest_consign')
+          .then(this.getHomeInfoSucc)
+      },
+      getHomeInfoSucc(res) {
+        console.log(res)
+        this.iconList = res.data;
+        if (this.iconList)
+          this.isActive = true
+      }
+    },
+    mounted() {
+      this.getHomeInfo()
+    }
+  });
+    </script>
+</body>
+</html>

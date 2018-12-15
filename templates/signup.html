@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel = "stylesheet">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta name="viewport" content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        logo {
+
+        }
+        .logo img {
+            width: 2.75rem;
+            height: 2.75rem;
+            margin-top: 2.775rem;
+
+        }
+        .sign-up-input {
+            margin-top: 2.05rem;
+            margin-bottom: .25rem;
+            width: 2.65rem;
+            height: 0.6rem;
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+        .sign-up-input2 {
+            margin-top: .25rem;
+            margin-bottom: .275rem;
+            width: 2.65rem;
+            height: 0.6rem;
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+        .input-p {
+            text-align: center;
+        }
+        .line {
+            height: .025rem;
+            width: 6.875rem;
+            background: -webkit-linear-gradient(left,rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
+            background: linear-gradient(to right, rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
+            border-width: 0;
+        }
+        .line2{
+            height: .025rem;
+            width: 6.875rem;
+            background: -webkit-linear-gradient(left,rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
+            background: linear-gradient(to right, rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
+            border-width: 0
+        }
+        input::-ms-input-placeholder{
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+        input::-webkit-input-placeholder{
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+        .sign-up-login{
+            margin-top: 1.75rem;
+            position: relative;
+            vertical-align: top;
+            width: 5.5rem;
+            height: 1.1rem;
+            padding: 0;
+            font-size: .2933333333333rem;
+            color: white;
+            text-align: center;
+            /*text-shadow: 0 .013333333rem .026666667rem rgba(0, 0, 0, 0.25);*/
+            border: 0;
+            /*border-bottom: .0266666666667rem solid #33ccff;*/
+            /*border-radius: .0666666667rem;*/
+            cursor: pointer;
+            /*-webkit-box-shadow: inset 0 -.0266666666667rem #33ccff;*/
+            /*box-shadow: inset 0 -.026666666667rem #33ccff;*/
+            background-image: linear-gradient(164deg,
+            #60dafe 0%,
+            #41bcf5 100%);
+            background-color: #3a74f2;
+            box-shadow:0 3px 12px #3c9af2;
+            opacity: 0.8;
+            border-radius: 0.55rem;
+        }
+        .biaoti {
+            margin-top: 3.175rem;
+            font-family: PingFangSC-Semibold;
+            font-size: 0.8rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.056rem;
+            color: #2e2e2e;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center" class = "biaoti"><b>创建您的账号</b></h1>
+<form action="/signup" method="post">
+    <p class = "input-p"><input type = "text" name = "username" class = "sign-up-input" placeholder = "    用户名" style = "border: none"></p>
+    <p><center><hr class = "line2"/></center></p>
+    <p><center><hr class = "line2"/></center></p>
+    <p class = "input-p"><input type = "password" name = "password" class = "sign-up-input2" placeholder = "   输入密码" style = "border: none"></p>
+    <p><center><hr class = "line2"/></center></p>
+    <p><center><hr class = "line2"/></center></p>
+    <p class = "input-p"><input type = "password" name = "password1" class = "sign-up-input2" placeholder = "   确认密码" style = "border: none"></p>
+    <p class = "input-p"><a href = "login.html"><input type = "submit" style = "font-size: 16px" class = "sign-up-login" value = "创建并登录"/></a></p>
+</form>
+</body>
+</html>

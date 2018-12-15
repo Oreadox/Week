@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>发布</title>
+    <link rel="stylesheet">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <script src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+    <script src="static/js/jquery-2.1.1.min.js"></script>
+    <script src="static/js/nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .head::-ms-input-placeholder {
+            color: #626262;
+        }
+
+        .head::-moz-placeholder {
+            color: #626262;;
+        }
+
+        .head::-webkit-input-placeholder {
+            color: #626262;;
+        }
+
+        .rectangle {
+            height: 1.675rem;
+            background-image: linear-gradient(145deg,
+            #0aacfb 0%,
+            #72e4ff 100%);
+        }
+
+        .the_right {
+            display: inline-block;
+            margin-top: .85rem;
+        }
+
+        .head {
+            display: inline-block;
+            margin-top: .575rem;
+            background-color: #24bafc;
+            height: .95rem;
+            width: .15rem;
+        }
+
+        .head input {
+            display: block;
+            border: 0;
+            width: 7rem;
+            height: .95rem;
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: .5rem;
+            color: #626262;
+            margin-left: .5rem;
+        }
+
+        .math {
+            float: right;
+            margin-right: .5rem;
+            margin-top: .9rem;
+        }
+
+        .math1 {
+            float: right;
+            margin-right: .1rem;
+            margin-top: .9rem;
+        }
+
+        .verbose {
+            margin-top: .575rem;
+            text-align: center;
+            vertical-align: bottom;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .verbose textarea {
+            margin-top: .2rem;
+            vertical-align: bottom;
+            border: 0;
+            overflow: hidden;
+            width: 7.425rem;
+            height: 3.375rem;
+            background-color: #f4f6f8;
+            resize: none;
+            outline: none;
+            font-family: PingFangSC-Regular;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.039rem;
+            color: #8b8b8b;
+        }
+
+        .div_verbose {
+            width: 8.425rem;
+            height: 4.375rem;
+            background-color: #f4f6f8;
+            border-radius: 0.55rem;
+            position: relative;
+        }
+
+        .span {
+            /*position: absolute;*/
+            /*right;*/
+        }
+
+        .math2 {
+            float: right;
+        }
+
+        .dist {
+            margin-right: 5.2rem;
+        }
+
+        .tel {
+            text-align: center;
+        }
+
+        .tel input {
+            /*text-align: center;*/
+            width: 8.225rem;
+            height: 1rem;
+            background-color: #f4f6f8;
+            border-radius: 0.55rem;
+            border: 0;
+            margin-top: .55rem;
+            font-family: PingFangSC-Regular;
+            font-size: 15px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.039rem;
+            color: #a0a0a0;
+        }
+
+        .icon {
+            display: inline-flex;
+            display: flex;
+            justify-content: space-between;
+            margin-top: .9rem;
+            height: 1.525rem;
+            /*background-color: #f2f2f2;*/
+            /*background-color: #ffffff;*/
+            /*border: solid 0rem #9a9a9a;*/
+            /*margin-bottom:rem;*/
+            /*text-align: center;*/
+        }
+
+        .icon div {
+            width: 2.1rem;
+            height: 1.225rem;
+            background-color: #f4f6f8;
+            border-radius: 0.275rem;
+            text-align: center;
+        }
+
+        .icon img {
+            /*display: inline-block;*/
+            /*display: block;*/
+            margin-top: .225rem;
+            vertical-align: center;
+            width: .925rem;
+            height: .9rem;
+        }
+
+        .icon1 {
+            margin-left: 6.67%;
+        }
+
+        .icon2 {
+            margin-right: 6.67%;
+        }
+
+        .icon1 input {
+            display: none;
+        }
+        .sub{
+            margin-top: 1rem;
+            display: block;
+            text-align: center;
+        }
+        .sub input{
+            width: 4.125rem;
+            height: 1rem;
+            background-color: #ffffff;
+            border-radius: 0.675rem;
+            border: solid 0.025rem #2cbffd;
+            font-family: PingFangSC-Regular;
+            font-size: 0.45rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.025rem;
+            color: #23bafd;
+            margin-top: 1.825rem;
+        }
+    </style>
+    <meta content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <script src="static/js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<div class="rectangle">
+    <span><a href="/index"><img class="the_right" src="static/imgs/右边.svg"></a></span>
+</div>
+<form action="/consign" method="post">
+    <div>
+        <span class="head"><input cols="1" id="content" maxlength="12" name="consign_name" onkeyup="javascript:checkWords(this);"
+                                  onmousedown="javascript:checkWords(this);" placeholder="     请输入标题(十二字内)" rows="1"
+                                  type="text"></span>
+        <span class="math"><pre
+                style="font-family: PingFangSC-Light, Microsoft JhengHei;font-size: .4rem">/ 12</pre></span><span
+            class="math1" id="wordCheck"
+            style="font-family: PingFangSC-Light, Microsoft JhengHei;font-size: .4rem">0</span>
+    </div>
+    <div class="verbose">
+        <div class="div_verbose" id="txt">
+            <textarea id="input_test" maxlength="70" name="desc" onkeyup="javascript:checkWord(this);"
+                      onmousedown="javascript:checkWord(this);" placeholder="  请输入您的需求详情（70字内）"></textarea>
+            <span class="math2"><pre
+                    style="font-family: PingFangSC-Light, Microsoft JhengHei;font-size: 15px;color: #9b9b9b;">您已输入</span><span
+                class="span"
+                id="wordCheck2" style="font-family: PingFangSC-Light, Microsoft JhengHei;font-size: .4rem;color: #9b9b9b;">0</span><span class="dist">字</span></pre>
+        </div>
+    </div>
+    <div class="tel">
+        <input name="contact" placeholder="    请输入您的联系方式" type="text"/>
+    </div>
+    <div class="icon">
+        <div class="icon1"><label for="icon1"><input id="icon1" name="partition" onclick="changeImg1()" type="radio"
+        value="1"><img id="ico1" src="static/imgs/失物招领.svg"></label></div>
+        <div><label for="icon2"><input id="icon2" name="partition" onclick="changeImg2()" style="display: none"
+                                       type="radio" value="2"/><img id="ico2" src="static/imgs/快递代领.svg"></label></div>
+        <div class="icon2">
+            <label for="icon3"><input id="icon3" name="partition" onclick="changeImg3()" style="display: none" type="radio" value="3"/>
+                <img id="ico3" src="static/imgs/二手交易.svg"></label>
+        </div>
+    </div>
+    <div class="sub">
+      <input type="submit" value="提 交">
+    </div>
+</form>
+
+<script>
+    var maxstrlen = 12;
+
+    function Q(s) {
+        return document.getElementById(s);
+    }
+
+    function checkWords(c) {
+        len = maxstrlen;
+        var str = c.value;
+        mylen = getStrleng(str);
+        var wck = Q("wordCheck");
+        if (mylen > len * 2) {
+            c.value = str.substring(0, i + 1);
+        } else {
+            wck.innerHTML = Math.floor(mylen / 2);
+        }
+    }
+
+    function getStrleng(str) {
+        mylen = 0;
+        i = 0;
+        for (; (i < str.length) && (mylen <= maxstrlen * 2); i++) {
+            if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)
+                mylen += 2;
+            else
+                mylen += 2;
+        }
+        return mylen;
+    }
+</script>
+<script>
+    var maxstrlen = 70;
+
+    function Q(s) {
+        return document.getElementById(s);
+    }
+
+    function checkWord(c) {
+        len = maxstrlen;
+        var str = c.value;
+        myLen = getStrleng(str);
+        var wck = Q("wordCheck2");
+        if (myLen > len * 2) {
+            c.value = str.substring(0, i + 1);
+        } else {
+            wck.innerHTML = Math.floor(myLen / 2);
+        }
+    }
+
+    function getStrleng(str) {
+        myLen = 0;
+        i = 0;
+        for (; (i < str.length) && (myLen <= maxstrlen * 2); i++) {
+            if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)
+                myLen += 2;
+            else
+                myLen += 2;
+        }
+        return myLen;
+    }
+</script>
+<script>
+    function changeImg1() {
+        var a = document.getElementById("ico1");
+        var b = document.getElementById("ico2");
+        var c = document.getElementById("ico3");
+        a.setAttribute("src", "static/imgs/失物招领x.svg");
+        b.setAttribute("src", "static/imgs/快递代领.svg");
+        c.setAttribute("src", "static/imgs/二手交易.svg");
+    }
+    function changeImg2() {
+        var a = document.getElementById("ico1");
+        var b = document.getElementById("ico2");
+        var c = document.getElementById("ico3");
+        a.setAttribute("src", "static/imgs/失物招领.svg");
+        b.setAttribute("src", "static/imgs/快递代领x.svg");
+        c.setAttribute("src", "static/imgs/二手交易.svg");
+    }
+    function changeImg3() {
+        var a = document.getElementById("ico1");
+        var b = document.getElementById("ico2");
+        var c = document.getElementById("ico3");
+        a.setAttribute("src", "static/imgs/失物招领.svg");
+        b.setAttribute("src", "static/imgs/快递代领.svg");
+        c.setAttribute("src", "static/imgs/二手交易x.svg");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta name="viewport" content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>搜索</title>
+    <style>
+        input::-ms-input-placeholder {
+            font-family: PingFangSC-Light;
+            font-size: 0.42rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: #ffffff;
+        }
+
+        input::-webkit-input-placeholder {
+            font-family: PingFangSC-Light;
+            font-size: 0.42rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: #ffffff;
+        }
+
+        .rectangle {
+            /*display: block;*/
+            /*margin-top: .45rem;*/
+            height: 1.775rem;
+            background-image: linear-gradient(145deg,
+            #0aacfb 0%,
+            #72e4ff 100%);
+        }
+
+        .search {
+            display: inline-block;
+            margin-left: .475rem;
+            margin-top: .45rem;
+            width: 6.7rem;
+            height: .625rem;
+            /*background-image: url(static/imgs/放大镜.svg);*/
+            /*background-repeat: no-repeat;*/
+            /*background-position: 5%;*/
+            border-radius: 0.388rem;
+            border: none;
+            font-family: PingFangSC-Light;
+            font-size: 0.35rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+
+        .toolbar {
+            display: inline-flex;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 14.4rem;
+            /*margin-bottom: 1rem;*/
+            background-color: #ffffff;
+            box-shadow: 0rem -0.1rem 0.25rem 0rem rgba(203, 203, 203, 0.26);
+            border: solid 0rem #9a9a9a;
+        }
+
+        .icon1 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            margin-left: 10.333%;
+            margin-top: .375rem;
+        }
+
+        .icon2 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            /*margin-left: 12.77777%;*/
+            margin-top: .375rem;
+        }
+
+        .icon3 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            /*margin-left: 12.77777%;*/
+            margin-top: .375rem;
+        }
+
+        .icon4 {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            display: inline-flex;
+            justify-content: space-between;
+            /*margin-left: 12.77777%;*/
+            margin-top: .375rem;
+            margin-right: 10.3333%;
+        }
+
+        .icon_size {
+            width: .925rem;
+            height: .9rem;
+        }
+
+        .div_footer {
+            display: inline-flex;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 1.525rem;
+            background-color: #f2f2f2;
+            /*margin-left: -27px;*/
+            /*margin-right: -27px;*/
+            /*padding: 0;*/
+            background-color: #ffffff;
+            box-shadow: 0rem -0.1rem 0.25rem 0rem rgba(203, 203, 203, 0.26);
+            border: solid 0rem #9a9a9a;
+        }
+    </style>
+</head>
+<body>
+<div class="rectangle">
+    <span class="search"><input type="" class="search"></span>
+</div>
+<div class="div_footer">
+    <span class="icon1"><img src="/static/imgs/最新需求x.svg" class="icon_size"></span>
+    <span class="icon2"><img src="/static/imgs/失物招领.svg" class="icon_size"></span>
+    <span class="icon3"><img src="/static/imgs/快递代领.svg" class="icon_size"> </span>
+    <span class="icon4"><img src="/static/imgs/二手交易.svg" class="icon_size"> </span>
+</div>
+</body>
+</html>

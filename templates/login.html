@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <meta name="viewport" content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        logo {
+
+        }
+
+        .logo img {
+            width: 2rem;
+            height: 2rem;
+            margin-top: 2.775rem;
+            box-shadow: 0 3px 12px #3c9af2;
+            opacity: 0.8;
+        }
+
+        .sign-up-input {
+            margin-top: .925rem;
+            margin-bottom: .25rem;
+            width: 2.65rem;
+            height: 0.6rem;
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+
+        .sign-up-input2 {
+            margin-top: .25rem;
+            width: 2.65rem;
+            height: 0.6rem;
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+
+        .input-p {
+            text-align: center;
+        }
+
+        .line {
+            height: .025rem;
+            width: 6.875rem;
+            background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), #5DDDD3, rgba(255, 255, 255, 0));
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), #5DDDD3, rgba(255, 255, 255, 0));
+            border-width: 0;
+        }
+
+        input::-ms-input-placeholder {
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+
+        input::-webkit-input-placeholder {
+            font-family: PingFangSC-Light;
+            font-size: 0.425rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.03rem;
+            color: rgba(46, 46, 46, 0.5);
+        }
+
+        .sign-up-login {
+            margin-top: 1.75rem;
+            position: relative;
+            vertical-align: top;
+            width: 5.5rem;
+            height: 1.1rem;
+            padding: 0;
+            font-size: .2933333333333rem;
+            color: white;
+            text-align: center;
+            /*text-shadow: 0 .013333333rem .026666667rem rgba(0, 0, 0, 0.25);*/
+            border: 0;
+            /*border-bottom: .0266666666667rem solid #33ccff;*/
+            /*border-radius: .0666666667rem;*/
+            cursor: pointer;
+            /*-webkit-box-shadow: inset 0 -.0266666666667rem #33ccff;*/
+            /*box-shadow: inset 0 -.026666666667rem #33ccff;*/
+            background-image: linear-gradient(164deg,
+            #60dafe 0%,
+            #41bcf5 100%);
+            background-color: #3a74f2;
+            box-shadow: 0 3px 12px #3c9af2;
+            opacity: 0.8;
+            border-radius: 0.55rem;
+        }
+
+        .signin {
+            color: lightslategray;
+        }
+
+        .sign-up-register {
+            margin-top: .725rem;
+            position: relative;
+            vertical-align: top;
+            width: 5.5rem;
+            height: 1.1rem;
+            padding: 0;
+            font-size: .2933333333333rem;
+            color: white;
+            text-align: center;
+            /*text-shadow: 0 .013333333rem .026666667rem rgba(0, 0, 0, 0.25);*/
+            border: 0;
+            /*border-bottom: .0266666666667rem solid #33ccff;*/
+            /*border-radius: .0666666667rem;*/
+            cursor: pointer;
+            /*box-shadow: inset 0 -.026666666667rem #33ccff;*/
+            background-image: linear-gradient(162deg,
+            #fad861 0%,
+            #f71ce1 100%);
+            background-image: -webkit-linear-gradient(left, #fad861, #f71ce1);
+            background-image: -moz-linear-gradient(left, #fad861, #f71ce1);
+            background-image: linear-gradient(to right, #fad861, #f71ce1);
+            background-color: #fad861;
+            box-shadow: 0 3px 12px #ff99cc;
+            opacity: 0.8;
+            border-radius: 0.55rem;
+        }
+    </style>
+</head>
+<body>
+<div class="logo">
+    <p style="text-align: center"><img src="static/imgs/logo1.jpg" alt="图片加载失败"></p>
+</div>
+<form action="/login" method="post">
+    <p class="input-p"><input type="text" name="username" class="sign-up-input" placeholder="    用户名"
+                              style="border: none"></p>
+    <p>
+    <center>
+        <hr class="line"/>
+    </center>
+    </p>
+    <p class="input-p"><input type="password" name="password" class="sign-up-input2" placeholder="    密码"
+                              style="border: none"></p>
+    <p class="input-p"><input type="submit" style="font-size: 16px" class="sign-up-login" value="登    录"/></p>
+    <div class="shadow"></div>
+    <p class="input-p"><a href="/signup"><input style="font-size: 16px" class="sign-up-register"
+                                                    value="注    册"/></a></p>
+</form>
+</body>
+</html>
