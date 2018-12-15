@@ -4,7 +4,7 @@ from flask import Flask, request, render_template, redirect, jsonify, json, make
 from flask_cors import CORS
 import os, time, sched
 from datetime import timedelta, datetime
-from decorators import login_require
+from decorators import login_required
 import pymysql
 
 db = pymysql.connect("localhost", "user", "user", "db1")
@@ -45,14 +45,14 @@ def timing():
 
 # 主页
 @app.route('/', methods=["GET"])
-@login_require
+@login_required
 def index():
     username = session.get("username")
     return render_template('index.html', username=username)
 
 
 @app.route('/index', methods=["GET"])
-@login_require
+@login_required
 def Index():
     return redirect(url_for('index'))
 
@@ -156,7 +156,7 @@ def logout():
 
 # 发布委托
 @app.route('/consign', methods=["POST", "GET"])
-@login_require
+@login_required
 def consign():
     if (request.method == 'GET'):
         return render_template('consign.html')
@@ -199,7 +199,7 @@ def consign():
 
 # 委托状态变更（是否已完成）
 @app.route('/consign/finish', methods=["POST"])
-@login_require
+@login_required
 def finish_change():
     cursor = db.cursor()
     consign_id = request.form.get('consign_id')
@@ -233,7 +233,7 @@ def finish_change():
 
 # 委托删除
 @app.route('/consign/delete', methods=["POST"])
-@login_require
+@login_required
 def consign_delete():
     cursor = db.cursor()
     consign_id = request.form.get('consign_id')
@@ -265,14 +265,14 @@ def consign_delete():
 
 # 已发布
 @app.route('/my_consign', methods=["GET"])
-@login_require
+@login_required
 def my_consign():
     return render_template('my_consign.html')
 
 
 # 获取已发布
 @app.route('/get_consign', methods=["GET"])
-@login_require
+@login_required
 def get_consign():
     cursor = db.cursor()
     user_id = session.get('user_id')
@@ -300,7 +300,7 @@ def get_consign():
 
 # 判断该委托是否被收藏
 @app.route('/consign/<consign_id>', methods=["GET"])
-@login_require
+@login_required
 def consign_collect(consign_id):
     cursor = db.cursor()
     user_id = session.get("user_id")
@@ -321,14 +321,14 @@ def consign_collect(consign_id):
 
 
 # 收藏添加
-@app.route('/add_collect', methods=["GET"])
-# @login_require
+@app.route('/add_collect/', methods=["GET"])
+@login_required
 def add_collect():
     cursor = db.cursor()
-    consign_id = int(str(request.args.get('consign_id'))[-3:-1])
+    consign_id = int(str(request.args.get('consign_id'))[:-1])
     # print(consign_id)
-    user_id = 5
-    # user_id=session.get('user_id')
+    # user_id = 5
+    user_id=session.get('user_id')
     sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, consign_id)
     results = cursor.execute(sql)
     if results:
@@ -358,14 +358,14 @@ def add_collect():
 
 # 收藏页面获取
 @app.route('/collect', methods=["GET"])
-@login_require
+@login_required
 def collect():
     return render_template('collect.html')
 
 
 # 获取收藏
 @app.route('/get_collect', methods=["GET"])
-@login_require
+@login_required
 def get_collect():
     cursor = db.cursor()
     user_id = session.get('user_id')
@@ -398,7 +398,7 @@ def get_collect():
 
 # 收藏删除
 @app.route('/collect/delete', methods=["POST"])
-@login_require
+@login_required
 def collect_delete():
     cursor = db.cursor()
     consign_id = request.form.get('consign_id')
@@ -435,22 +435,23 @@ def collect_delete():
 
 # 搜索网页获取
 @app.route('/search/', methods=["GET"])
-@login_require
+@login_required
 def search_():
     return render_template('search.html')
 
 
 @app.route('/search/<search_str>', methods=["GET"])
-@login_require
+@login_required
 def search(search_str):
     return render_template('search.html', search_str=search_str)
 
 
 # 搜索功能
 @app.route('/Search/<search_str>', methods=["GET"])
-# @login_require
+@login_required
 def Search(search_str):
     cursor = db.cursor()
+    user_id = session.get('user_id')
     search_str = str(search_str)
     search_list = search_str.split()
     output = []
@@ -471,6 +472,12 @@ def Search(search_str):
         cache['desc'] = val[4]
         Time = str(val[5])[:-3]
         cache['time'] = time.strftime("%Y/%m/%d %H:%M", time.strptime(Time, '%Y-%m-%d %H:%M'))
+        sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, cache['consign_id'])
+        sql = cursor.execute(sql)
+        if sql:
+            cache['collected'] = 1
+        else:
+            cache['collected'] = 0
         output.append(cache)
     cursor.close()
     print(output)
@@ -479,9 +486,10 @@ def Search(search_str):
 
 # 最新委托
 @app.route('/newest_consign', methods=["GET"])
-# @login_require
+@login_required
 def new_consign():
     cursor = db.cursor()
+    user_id = session.get('user_id')
     sql = "select * from consigns where finished=0 order by `time` desc limit 12"
     cursor.execute(sql)
     results = cursor.fetchall()
@@ -493,7 +501,12 @@ def new_consign():
         cache['desc'] = result[4]
         Time = str(result[5])[:-3]
         cache['time'] = time.strftime("%Y/%m/%d %H:%M", time.strptime(Time, '%Y-%m-%d %H:%M'))
-        # cache['time'] = str(result[5])
+        sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, cache['consign_id'])
+        sql = cursor.execute(sql)
+        if sql:
+            cache['collected'] = 1
+        else:
+            cache['collected'] = 0
         output.append(cache)
     cursor.close()
     return jsonify(output)
@@ -501,9 +514,10 @@ def new_consign():
 
 # 获取分区委托
 @app.route('/get_partition/<partition_num>', methods=["GET"])
-@login_require
+@login_required
 def partition(partition_num):
     cursor = db.cursor()
+    user_id = session.get('user_id')
     sql = "select * from consigns where `partition`='%s' order by `time` desc" % (partition_num)
     results = cursor.execute(sql)
     output = []
@@ -517,6 +531,12 @@ def partition(partition_num):
             Time = str(result[5])[:-3]
             cache['time'] = time.strftime("%Y/%m/%d %H:%M", time.strptime(Time, '%Y-%m-%d %H:%M'))
             # cache['time'] = str(result[5])
+            sql = "select * from collects where user_id='%s' and consign_id='%s'" % (user_id, cache['consign_id'])
+            sql = cursor.execute(sql)
+            if sql:
+                cache['collected'] = 1
+            else:
+                cache['collected'] = 0
             output.append(cache)
         cursor.close()
         return jsonify(output)
@@ -527,7 +547,7 @@ def partition(partition_num):
 
 # 获取分区网页
 @app.route('/partition/<n>', methods=["GET"])
-@login_require
+@login_required
 def get_partition(n):
     return render_template("partition_{}.html".format(n))
 
