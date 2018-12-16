@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
-    <title>x</title>
+    <title>取消</title>
     <desc>Created with Sketch.</desc>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <g id="收藏" transform="translate(-299.000000, -518.000000)" stroke="#FDFEFF" stroke-width="1.7">
-            <g id="01" transform="translate(26.000000, 502.000000)">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="收藏" transform="translate(-294.000000, -93.000000)">
+            <g id="01" transform="translate(26.000000, 82.000000)">
                 <g id="Group" transform="translate(268.000000, 11.000000)">
                     <g id="取消">
-                        <g id="x" transform="translate(6.000000, 6.000000)">
+                        <circle id="Oval" fill="#1AB5FC" opacity="0.964471726" cx="10.5" cy="10.5" r="10.5"></circle>
+                        <g id="x" transform="translate(6.000000, 6.000000)" stroke="#FDFEFF" stroke-linecap="round" stroke-width="1.7">
                             <path d="M8.5,0.5 L0.491631574,8.50836843" id="Line-2"></path>
                             <path d="M8.5,0.5 L0.491631574,8.50836843" id="Line-2" transform="translate(4.500000, 4.500000) rotate(-90.000000) translate(-4.500000, -4.500000) "></path>
                         </g>

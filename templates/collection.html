@@ -99,9 +99,9 @@
             color: #c6c6c6;
         }
         .lx{
-            margin-right: .3rem;
-            margin-top: .225rem;
-            width: 3.125rem;
+            /*margin-right: .2rem;*/
+            margin-top: .15rem;
+            width: 3.925rem;
             height: 0.15rem;
             font-family: PingFangSC-Regular;
             font-size: 0.25rem;
@@ -247,12 +247,15 @@
             margin-top: .9rem;
             margin-bottom: 4.2rem;
         }
+        .title img{
+            float: right;
+        }
     </style>
     <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
     <script src="static/js/jquery-2.1.1.min.js"></script>
     <script src="static/js/nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/static/js/axios.min.js"></script>
     <meta content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 </head>
 <body>
@@ -266,11 +269,12 @@
 <div class="cc" id="app">
         <div class="bg" v-bind:class="isActive" v-for="item in iconList">
             <div class="des">
-                <div class="title">{[ item.consign_name ]}</div>
+                <div class="title">{[ item.consign_name ]}<img src="static/imgs/取消.svg" :id="item.consign_id" @click="selectImg($event)"></div>
+
                 <div class="text">{[ item.desc ]}</div>
                 <div class="tl">
                     <span class="time">{[ item.time ]}</span>
-                    <span class="lx">联系方式</span>
+                    <span class="lx">联系方式：{[ item.contact ]}</span>
                 </div>
             </div>
         </div>
@@ -303,7 +307,7 @@
                 <div class="bb"></div>
                 <img src="static/imgs/已收藏1.svg" class="icon_size2" style="margin-left:0.73rem"/>
                 <div class="mading" style="margin-left: 0.29rem;">
-                    <a href="/collect" style="color: #616161">
+                    <a href="/collection" style="color: #616161">
                         已收藏
                     </a>
                 </div>
@@ -319,7 +323,7 @@
         </ul>
     </div>
     <div class="li4">
-        <span><pre class="font"><a href="/logout"><img src="static/imgs/退出.svg" class="icon_size3"/>   退出</pre>
+        <span><pre class="font"><a href="/login"><img src="static/imgs/退出.svg" class="icon_size3"/>   退出</pre>
             </a>
         </span>
     </div>
@@ -341,10 +345,24 @@
           .then(this.getHomeInfoSucc)
       },
       getHomeInfoSucc(res) {
-        console.log(res)
         this.iconList = res.data;
         if (this.iconList)
           this.isActive = true
+      },
+      selectImg(event) {
+        var x = event.target;
+        let y = x.id
+        axios.get('/collect/delete', {
+          params: { //请求参数
+            'consign_id': y
+          }
+        }).then(function (response) {
+          console.log(response);//请求正确时执行的代码
+        }).catch(function (response) {
+          console.log(response);//发生错误时执行的代码
+        })
+        location.reload(
+        )
       }
     },
     mounted() {

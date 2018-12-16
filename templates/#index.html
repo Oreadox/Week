@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>主页</title>
+  <link rel='stylesheet' href='static/css/index.css'>
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+  <meta name="viewport" content="width=360px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+  <script src="static/js/jquery-2.1.1.min.js"></script>
+  <script src="static/js/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+  .ssss{
+    background-image: url(static/imgs/已收藏.svg);
+    background-repeat: no-repeat;
+  }
+</style>
+</head>
+<body>
+<div class="rectangle">
+  <span class="needing">Needing</span>
+  <span class="new_need"><b>最新需求</b></span>
+  <div class="the_right">
+    <img src="static/imgs/右边.svg" class="left">
+    <span><a href="search.html"><input type="button" class="search"></a></span>
+    <span><a href="consign.html"><input type="button" style="color: #ffffff" value=" 发布需求" class="send"/></a></span>
+  </div>
+</div>
+<div id="app" class="cc">
+  <div style="width: 8.4rem; margin: 0 auto; background: #333;">
+    <div v-bind:class="isActive" class="bg" v-for="item in iconList">
+      <span class="head">{[ item.consign_name ]}</span>
+      <span class="text">{[ item.desc ]}</span>
+      <span class="time">{[ item.time ]}</span>
+      <span class="sc" @click="selectImg($event)"><span class="ssss":name="item.consign_id" :id="item.consign_id"/></span>
+      <div class="ns"></div>
+      <div style="color: #ffffff">test</div>
+    </div>
+  </div>
+</div>
+<div class="ques"></div>
+<div class="div_footer">
+  <span class="icon1"><a href="/index"><img src="static/imgs/最新需求x.svg" class="icon_size" id="ico1"></a></span>
+  <span class="icon2"><a href="partition/1"><img src="static/imgs/失物招领.svg" class="icon_size" id="ico2"></a></span>
+  <span class="icon3"><a href="partition/2"><img src="static/imgs/快递代领.svg" class="icon_size" id="ico3"></a></span>
+  <span class="icon4"><a href="partition/3"><img src="static/imgs/二手交易.svg" class="icon_size" id="ico4"></a></span>
+</div>
+<div class="bgDiv"></div>
+<div class="leftNav">
+  <div class="logo">
+    <img src="static/imgs/logo.jpg">
+  </div>
+  <p class="tips">
+  <pre class="tips_font"><h1 class="username">{{session.get('username')}}</h1>
+    tips:点击需求卡片后的小星星,可
+    以在已收藏中查看联系方式!
+        </pre>
+  </p>
+  <div class="func">
+    <ul>
+      <li class="li1">
+        <div class="bb"></div>
+        <img src="static/imgs/首页.svg" class="icon_size2">
+        <div class="mading">
+          <a href="/" style="color: #616161">
+            首页
+          </a>
+        </div>
+      </li>
+      <li class="li2">
+        <img src="static/imgs/已收藏1.svg" class="icon_size2" style="margin-left:0.87rem"/>
+        <div class="mading"style="margin-left: 0.29rem;">
+          <a href="/collection" style="color: #616161">
+            已收藏
+          </a>
+        </div>
+      </li>
+      <li class="li2">
+        <img src="static/imgs/已发布.svg" class="icon_size2" style="margin-left:0.9rem"/>
+        <div class="mading"style="margin-left: 0.37rem;margin-top:.25rem;">
+          <a href="/history" style="color: #616161">
+            已发布
+          </a>
+        </div>
+      </li>
+    </ul>
+</div>
+  <div class="li4">
+        <span><pre class="font"><a href="/logout"><img src="static/imgs/退出.svg" class="icon_size3"/>   退出</pre>
+          </a>
+        </span>
+  </div>
+</div>
+<script>
+
+</script>
+<script>
+      new Vue({
+          delimiters: ['{[', ']}'],
+        el: "#app",
+        data() {
+          return {
+            iconList: [],
+            isActive: '',
+          }
+        },
+        methods: {
+          getHomeInfo1() {
+            var _this = this
+            axios.get('/newest_consign')
+              .then(this.getHomeInfoSucc1)
+          },
+          getHomeInfoSucc1(res) {
+            console.log(res)
+            this.iconList = res.data;
+            if (this.iconList)
+              this.isActive = true
+          },
+            selectImg(event) {
+              var x = event.target;
+              let y = x.id
+              let star = x.name
+              alert('nimmm')
+              if(star === '21_')
+              {
+                var imgs =document.getElementById(y)
+                imgs.setAttribute("src", "static/imgs/已收藏x.svg");
+              }
+              var imgs =document.getElementById(y)
+              imgs.setAttribute("src", "static/imgs/已收藏x.svg");
+              var obj = document.getElementById(y);
+              axios.get('/add_collect/', {
+                params: { //请求参数
+                  'consign_id':y
+                }
+              }).then(function (response) {
+                console.log(response);//请求正确时执行的代码
+              }).catch(function (response) {
+                console.log(response);//发生错误时执行的代码
+              })
+            },
+        },
+        mounted() {
+          this.getHomeInfo1();
+          this.selectImg(event);
+        },
+      });
+</script>
+</body>
+</html>

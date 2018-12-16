@@ -2,12 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
     <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
-    <meta name="viewport" content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel='stylesheet' href='/static/css/style.css'>
+    <link rel='stylesheet' href='/static/css/swiper.min.css'>
+    <script src="/static/js/jquery.1.11.1.js"></script>
+    <script src="/static/js/swiper.min.js"></script>
+    <script src="/static/js/idangerous.swiper.min.js"></script>
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
+    <script src="/static/js/nav.js"></script>
+    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/static/js/axios.min.js"></script>
     <title>搜索</title>
     <style>
         input::-ms-input-placeholder {
@@ -35,36 +43,6 @@
             background-image: linear-gradient(145deg,
             #0aacfb 0%,
             #72e4ff 100%);
-        }
-
-        .search {
-            display: inline-block;
-            margin-left: .475rem;
-            margin-top: .45rem;
-            width: 6.7rem;
-            height: .625rem;
-            /*background-image: url(static/imgs/放大镜.svg);*/
-            /*background-repeat: no-repeat;*/
-            /*background-position: 5%;*/
-            border-radius: 0.388rem;
-            border: none;
-            font-family: PingFangSC-Light;
-            font-size: 0.35rem;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0.03rem;
-            color: rgba(46, 46, 46, 0.5);
-        }
-
-        .toolbar {
-            display: inline-flex;
-            display: flex;
-            justify-content: space-between;
-            margin-top: 14.4rem;
-            /*margin-bottom: 1rem;*/
-            background-color: #ffffff;
-            box-shadow: 0rem -0.1rem 0.25rem 0rem rgba(203, 203, 203, 0.26);
-            border: solid 0rem #9a9a9a;
         }
 
         .icon1 {
@@ -125,11 +103,150 @@
             box-shadow: 0rem -0.1rem 0.25rem 0rem rgba(203, 203, 203, 0.26);
             border: solid 0rem #9a9a9a;
         }
+        bgr{
+            width: 6.7rem;
+            height: .625rem;
+            border-radius: 0.388rem;
+            background-color: #ffffff;
+        }
+        .head {
+            margin-left: .4rem;
+            display: inline-block;
+            margin-top: .575rem;
+            background-color: #ffffff;
+            width: 6.0rem;
+            height: 0.65rem;
+            border-radius: 0.388rem;
+            padding-left: .5rem;
+        }
+
+        .head input {
+            /*display: block;*/
+            border: 0;
+            font-family: PingFangSC-Medium, Microsoft YaHei UI;
+            font-size: .4rem;
+            color: #c6c6c6;
+            /*color: #ffffff;*/
+            /*margin-left: .5rem;*/
+            border-radius: 0.388rem;
+        }
+        .dd{
+             display: inline-flex;
+             display: flex;
+             justify-content: space-around;
+         }
+        .bg1{
+              display: block;
+              width: 7.7rem;
+              height: 2.85rem;
+              background-color: #fdfeff;
+              box-shadow: 0rem 0.05rem 0.15rem 0rem
+              rgba(0, 0, 0, 0.13);
+              border-radius: 0.325rem;
+
+          }
+        .des{
+            margin-top: .65rem;
+        }
+        .title{
+            display: inline-block;
+            margin-top: .25rem;
+            margin-left: .3rem;
+            width: 6.675rem;
+            height: 0.675rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.35rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.02rem;
+            color: #2e2e2e;
+            margin-bottom: .1rem;
+        }
+        .text{
+            /*display: inline-block;*/
+            margin-left: .3rem;
+            width: 7.1rem;
+            height: 1.075rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0.014rem;
+            color: #7a7a7a;
+            margin-bottom: .225rem;
+        }
+        .time{
+            margin-left: .3rem;
+            width: 3.325rem;
+            height: 0.15rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0.15rem;
+            letter-spacing: 0.008rem;
+            color: #c6c6c6;
+        }
+        .lx{
+            margin-right: .3rem;
+            margin-top: .225rem;
+            width: 3.125rem;
+            height: 0.15rem;
+            font-family: PingFangSC-Regular;
+            font-size: 0.25rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0.15rem;
+            letter-spacing: 0.008rem;
+            color: #1ab5fc;
+            float: right;
+        }
+        .tl{
+            /*display: inline-flex;*/
+            /*display: flex;*/
+            /*justify-content: space-around;*/
+        }
+        .but{
+            margin-top: .575rem;
+            width: 1.5rem;
+            height: 0.65rem;
+            background-color: #ffffff;
+            border-radius: 0.388rem;
+            margin-left: .3rem;
+        }
+        .but button{
+            width: 1.5rem;
+            height: 0.65rem;
+            border: 0;
+            border-radius: 0.388rem;
+            background-color: #ffffff;
+        }
+        .but span{
+            color: #c6c6c6;
+        }
+        .x{
+            margin-top: .705rem;
+            margin-left: .35rem;
+        }
+        .x img{
+            width: .425rem;
+            height: .425rem;
+        }
+        .sc{
+            float:right;
+            margin-right: .405rem;
+        }
     </style>
 </head>
 <body>
+<div id="app">
 <div class="rectangle">
-    <span class="search"><input type="" class="search"></span>
+    <span class="x"><a href="/index"><img src="/static/imgs/x.svg"></a></span>
+    <span class="head">
+        <span style="margin-top: .13rem;display: inline-block"><img src="/static/imgs/放大镜x.svg"/></span>
+        <input type="text" class="search" value="" maxlength="15" id="name" name="name">
+    </span>
+    <label for="s" class="but"><button @click="getHomeInfo" value="搜 索" id="s"><span>搜 索</span></button></label>
 </div>
 <div class="div_footer">
     <span class="icon1"><img src="/static/imgs/最新需求x.svg" class="icon_size"></span>
@@ -137,5 +254,77 @@
     <span class="icon3"><img src="/static/imgs/快递代领.svg" class="icon_size"> </span>
     <span class="icon4"><img src="/static/imgs/二手交易.svg" class="icon_size"> </span>
 </div>
+<div class="dd">
+    <div class="cc">
+        <div class="bg1" v-bind:class="isActive" v-for="item in iconList">
+            <div class="des">
+                <div class="title">{[ item.consign_name ]}</div>
+                <div class="text">{[ item.desc ]}</div>
+                <div class="tl">
+                    <span class="time">{[ item.time ]}</span>
+                    <span class="sc" @click="selectImg($event)">
+                        <img v-bind:src="item.collected?'/static/imgs/已收藏x.svg':'/static/imgs/已收藏.svg'" :name="item.consign_id" :id="item.consign_id"/>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+  new Vue({
+      delimiters: ['{[', ']}'],
+      el: "#app",
+      data() {
+          return {
+              iconList: [],
+              isActive: '',
+          }
+      },
+      methods: {
+          getHomeInfo() {
+              var _this = this
+              a = document.getElementById("name").value
+              if (a) {
+                  var url = '/Search/' + a
+                  axios.get(url)
+                      .then(this.getHomeInfoSucc)
+              }
+              else
+                  alert("请输入关键字")
+          },
+          getHomeInfoSucc(res) {
+              this.iconList = res.data;
+              console.log(this.iconList)
+              if (this.iconList)
+                  this.isActive = true
+              if (this.iconList.length == 0)
+                  alert("对不起，没有找到结果！")
+          },
+          selectImg(event) {
+              var x = event.target;
+              let y = x.id
+              var imgs = document.getElementById(y)
+              imgs.setAttribute("src", "/static/imgs/已收藏x.svg");
+              var obj = document.getElementById(y);
+              axios.get('/add_collect/', {
+                  params: { //请求参数
+                      'consign_id': y
+                  }
+              }).then(function (response) {
+                  console.log(response);//请求正确时执行的代码
+              }).catch(function (response) {
+                  console.log(response);//发生错误时执行的代码
+              })
+              this.getHomeInfo()
+          }
+      },
+      mounted() {
+          this.selectImg(event)
+      },
+  });
+  </script>
+
 </body>
 </html>

@@ -6,16 +6,16 @@
   <meta content="yes" name="apple-touch-fullscreen">
   <meta content="telephone=no,email=no" name="format-detection">
   <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
-  <link rel='stylesheet' href='static/css/style.css'>
-  <link rel='stylesheet' href='static/css/swiper.min.css'>
-  <script src="static/js/jquery.1.11.1.js"></script>
-  <script src="static/js/swiper.min.js"></script>
-  <script src="static/js/idangerous.swiper.min.js"></script>
-  <script src="static/js/jquery-2.1.1.min.js"></script>
-  <script src="static/js/nav.js"></script>
-  <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+  <link rel='stylesheet' href='/static/css/style.css'>
+  <link rel='stylesheet' href='/static/css/swiper.min.css'>
+  <script src="/static/js/jquery.1.11.1.js"></script>
+  <script src="/static/js/swiper.min.js"></script>
+  <script src="/static/js/idangerous.swiper.min.js"></script>
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+  <script src="/static/js/nav.js"></script>
+  <script src="/static/js/html5shiv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/static/js/axios.min.js"></script>
   <title>发布历史</title>
   <style>
     .cc{
@@ -78,9 +78,8 @@
       color: #c6c6c6;
     }
     .lx{
-      margin-right: .3rem;
-      margin-top: .225rem;
-      width: 3.125rem;
+      margin-top: .15rem;
+      width: 3.925rem;
       height: 0.15rem;
       font-family: PingFangSC-Regular;
       font-size: 0.25rem;
@@ -91,13 +90,16 @@
       color: #1ab5fc;
       float: right;
     }
+    .title img{
+      float: right;
+    }
     </style>
 </head>
 <body>
 <div class="bg">
   <div class = "rectangle">
     <div class="right">
-      <img src = "static/imgs/右边.svg" class="left">
+      <img src = "/static/imgs/右边.svg" class="left">
     </div>
     <div class="send">发布历史</div>
   </div>
@@ -107,7 +109,9 @@
               <a href="javascript:void(0);" id="btn1" hidefocus="true" style="text-decoration: none">未接收</a>
             </li>
           <li>
-              <a href="javascript:void(0);" id="btn2" hidefocus="true" style="text-decoration: none">已接收</a>
+              <a href="javascript:void(0);" id="btn2" hidefocus="true" style="text-decoration: none">
+                已接收
+              </a>
             </li>
         </div>
     </div>
@@ -120,11 +124,11 @@
                 <div class="cc" id="app">
                   <div class="bg1" v-bind:class="isActive" v-for="item in iconList">
                     <div class="des">
-                      <div class="title">{{ item.consign_name }}</div>
-                      <div class="text">{{ item.desc }}</div>
+                      <div class="title">{[ item.consign_name ]}<img src="/static/imgs/取消.svg" :id="item.consign_id" @click="selectImg($event)"></div>
+                      <div class="text">{[ item.desc ]}</div>
                       <div class="tl">
-                        <span class="time">{{ item.time }}</span>
-                        <span class="lx">联系方式</span>
+                        <span class="time">{[ item.time ]}</span>
+                        <span class="lx">联系方式：{[ item.contact ]}</span>
                       </div>
                     </div>
                   </div>
@@ -134,13 +138,13 @@
             <div class="swiper-slide margin19">
               <div class="dd">
                 <div class="cc" id="app1">
-                  <div class="bg1" v-bind:class="isActive" v-for="item in iconList">
+                  <div class="bg1" v-bind:class="isActive" v-for="item in iconList2">
                     <div class="des">
-                      <div class="title">{{ item.consign_name }}</div>
-                      <div class="text">{{ item.desc }}</div>
+                      <div class="title">{[ item.consign_name ]}<img src="/static/imgs/取消.svg" :id="item.consign_id" @click="selectImg($event)"></div>
+                      <div class="text">{[ item.desc ]}</div>
                       <div class="tl">
-                        <span class="time">{{ item.time }}</span>
-                        <span class="lx">联系方式</span>
+                        <span class="time">{[ item.time ]}</span>
+                        <span class="lx">联系方式：{[ item.contact ]}</span>
                       </div>
                     </div>
                   </div>
@@ -172,7 +176,7 @@
 <div class="bgDiv"></div>
 <div class="leftNav">
   <div class="logo">
-    <img src="static/imgs/logo.jpg">
+    <img src="/static/imgs/logo.jpg">
   </div>
   <p class="tips">
   <pre class="tips_font"><h1 class="username">{{session.get('username')}}</h1>
@@ -183,7 +187,7 @@
   <div class="func">
     <ul>
       <li class="li2">
-        <img src="static/imgs/首页.svg" class="icon_size2" style="margin-left:0.75rem">
+        <img src="/static/imgs/首页.svg" class="icon_size2" style="margin-left:0.75rem">
         <div class="mading" style="margin-left: 0.37rem;">
           <a href="/" style="color: #616161">
             首页
@@ -191,16 +195,16 @@
         </div>
       </li>
       <li class="li2">
-        <img src="static/imgs/已收藏1.svg" class="icon_size2" style="margin-left:0.75rem"/>
+        <img src="/static/imgs/已收藏1.svg" class="icon_size2" style="margin-left:0.75rem"/>
         <div class="mading" style="margin-left: 0.3rem;">
-          <a href="/collect" style="color: #616161">
+          <a href="/collection" style="color: #616161">
             已收藏
           </a>
         </div>
       </li>
       <li class="li1">
         <div class="bb"></div>
-        <img src="static/imgs/已发布.svg" class="icon_size2" style="margin-left: .7rem"/>
+        <img src="/static/imgs/已发布.svg" class="icon_size2" style="margin-left: .7rem"/>
         <div class="mading"style="margin-top:.25rem;">
           <a href="/history" style="color: #616161">
             已发布
@@ -210,13 +214,54 @@
     </ul>
   </div>
   <div class="li4">
-        <span><pre class="font"><a href="/logout"><img src="static/imgs/退出.svg" class="icon_size3"/>   退出</pre>
-          </a>
+    <span><pre class="font"><a href="/logout"><img src="/static/imgs/退出.svg" class="icon_size3"/>   退出</a></pre>
         </span>
   </div>
 </div>
 <script>
   new Vue({
+      delimiters: ['{[', ']}'],
+    el: "#app1",
+    data() {
+      return {
+        iconList2: [],
+        isActive: '',
+      }
+    },
+    methods: {
+      getHomeInfo2() {
+        var _this = this
+        axios.get('/get_consign/1')
+          .then(this.getHomeInfoSucc2)
+      },
+      getHomeInfoSucc2(res) {
+        console.log(res)
+        this.iconList2 = res.data;
+        if (this.iconList2)
+          this.isActive = true
+      },
+        selectImg(event) {
+        var x = event.target;
+        let y = x.id
+        axios.get('/consign/delete/', {
+          params: { //请求参数
+            'consign_id': y
+          }
+        }).then(function (response) {
+          console.log(response);//请求正确时执行的代码
+        }).catch(function (response) {
+          console.log(response);//发生错误时执行的代码
+        })
+        location.reload(
+        )
+      }
+    },
+      created(){
+          this.getHomeInfo2()
+      }
+  });
+  new Vue({
+       delimiters: ['{[', ']}'],
     el: "#app",
     data() {
       return {
@@ -225,45 +270,35 @@
       }
     },
     methods: {
-      getHomeInfo() {
-        var _this = this
-        axios.get('http://101.132.107.146/newest_consign')
-          .then(this.getHomeInfoSucc)
-      },
-      getHomeInfoSucc(res) {
-        console.log(res)
-        this.iconList = res.data;
-        if (this.iconList)
-          this.isActive = true
-      }
+        getHomeInfo1() {
+            var _this = this
+            axios.get('/get_consign/2')
+                .then(this.getHomeInfoSucc1)
+        },
+        getHomeInfoSucc1(res) {
+            console.log(res)
+            this.iconList = res.data;
+            if (this.iconList)
+                this.isActive = true
+        },
+        selectImg(event) {
+            var x = event.target;
+            let y = x.id
+            axios.get('/consign/delete/', {
+                params: { //请求参数
+                    'consign_id': y
+                }
+            }).then(function (response) {
+                console.log(response);//请求正确时执行的代码
+            }).catch(function (response) {
+                console.log(response);//发生错误时执行的代码
+            })
+            location.reload(
+            )
+        }
     },
     mounted() {
-      this.getHomeInfo()
-    }
-  });
-  new Vue({
-    el: "#app1",
-    data() {
-      return {
-        iconList: [],
-        isActive: '',
-      }
-    },
-    methods: {
-      getHomeInfo() {
-        var _this = this
-        axios.get('/get_consign')
-          .then(this.getHomeInfoSucc)
-      },
-      getHomeInfoSucc(res) {
-        console.log(res)
-        this.iconList = res.data;
-        if (this.iconList)
-          this.isActive = true
-      }
-    },
-    mounted() {
-      this.getHomeInfo()
+      this.getHomeInfo1()
     }
   });
 </script>

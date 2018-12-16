@@ -9,6 +9,7 @@
     <meta content="telephone=no,email=no" name="format-detection">
     <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
     <meta name="viewport" content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <style>
         logo {
 
@@ -42,6 +43,7 @@
             font-stretch: normal;
             letter-spacing: 0.03rem;
             color: rgba(46, 46, 46, 0.5);
+            ime-mode:disabled;
         }
         .input-p {
             text-align: center;
@@ -114,15 +116,43 @@
 </head>
 <body>
 <h1 style="text-align: center" class = "biaoti"><b>创建您的账号</b></h1>
-<form action="/signup" method="post">
-    <p class = "input-p"><input type = "text" name = "username" class = "sign-up-input" placeholder = "    用户名" style = "border: none"></p>
+<form action="#" method="post" id="form1">
+    <p class = "input-p">
+        <input type = "text" name = "username" class = "sign-up-input" placeholder = "    用户名" style = "border: none" maxlength="6">
+    </p>
     <p><center><hr class = "line2"/></center></p>
     <p><center><hr class = "line2"/></center></p>
-    <p class = "input-p"><input type = "password" name = "password" class = "sign-up-input2" placeholder = "   输入密码" style = "border: none"></p>
+    <p class = "input-p">
+        <input type = "password" name = "password" class = "sign-up-input2" placeholder = "   输入密码" style = "border: none" maxlength="16">
+    </p>
     <p><center><hr class = "line2"/></center></p>
     <p><center><hr class = "line2"/></center></p>
-    <p class = "input-p"><input type = "password" name = "password1" class = "sign-up-input2" placeholder = "   确认密码" style = "border: none"></p>
-    <p class = "input-p"><a href = "login.html"><input type = "submit" style = "font-size: 16px" class = "sign-up-login" value = "创建并登录"/></a></p>
+    <p class = "input-p">
+        <input type = "password" name = "password1" class = "sign-up-input2" placeholder = "   确认密码" style = "border: none" maxlength="16">
+    </p>
+    <p class = "input-p"><input type = "button" style = "font-size: 16px" class = "sign-up-login" value = "创建并登录" onclick="signup()"/></p>
 </form>
+<script>
+function signup() {
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/signup" ,//url
+                data: $('#form1').serialize(),
+                success: function (result) {
+                    alert(result.message);//打印服务端返回的数据(调试用)
+                    if (result.resultCode == 200) {
+                        alert("SUCCESS");
+                    }
+
+                    ;
+                },
+                error : function() {
+                     location.href='/index'
+                }
+            });
+        }
+        </script>
 </body>
 </html>
