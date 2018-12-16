@@ -10,16 +10,8 @@
     <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
     <meta name="viewport" content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/shadow.css">
     <style>
-        logo {
-
-        }
-        .logo img {
-            width: 2.75rem;
-            height: 2.75rem;
-            margin-top: 2.775rem;
-
-        }
         .sign-up-input {
             margin-top: 2.05rem;
             margin-bottom: .25rem;
@@ -31,6 +23,7 @@
             font-stretch: normal;
             letter-spacing: 0.03rem;
             color: rgba(46, 46, 46, 0.5);
+            text-align: center;
         }
         .sign-up-input2 {
             margin-top: .25rem;
@@ -43,24 +36,27 @@
             font-stretch: normal;
             letter-spacing: 0.03rem;
             color: rgba(46, 46, 46, 0.5);
-            ime-mode:disabled;
+            text-align: center;
         }
         .input-p {
             text-align: center;
         }
-        .line {
-            height: .025rem;
-            width: 6.875rem;
-            background: -webkit-linear-gradient(left,rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
-            background: linear-gradient(to right, rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
-            border-width: 0;
-        }
+        /*.line {*/
+        /*height: .025rem;*/
+        /*width: 6.875rem;*/
+        /*background: -webkit-linear-gradient(left,rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));*/
+        /*background: linear-gradient(to right, rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));*/
+        /*border-width: 0;*/
+        /*}*/
         .line2{
+            flex: 0;
             height: .025rem;
             width: 6.875rem;
-            background: -webkit-linear-gradient(left,rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
-            background: linear-gradient(to right, rgba(254, 255, 255, 0),#5DDDD3,rgba(255,255,255,0));
-            border-width: 0
+            background: -webkit-linear-gradient(left,rgba(254, 255, 255, 0), #9ce0ff,rgba(255,255,255,0));
+            background: linear-gradient(to right, rgba(254, 255, 255, 0), #9ce0ff,rgba(255,255,255,0));
+            border-width: 0;
+            margin-left: auto;
+            margin-right: auto;
         }
         input::-ms-input-placeholder{
             font-family: PingFangSC-Light;
@@ -69,6 +65,7 @@
             font-stretch: normal;
             letter-spacing: 0.03rem;
             color: rgba(46, 46, 46, 0.5);
+            text-align: center;
         }
         input::-webkit-input-placeholder{
             font-family: PingFangSC-Light;
@@ -77,31 +74,7 @@
             font-stretch: normal;
             letter-spacing: 0.03rem;
             color: rgba(46, 46, 46, 0.5);
-        }
-        .sign-up-login{
-            margin-top: 1.75rem;
-            position: relative;
-            vertical-align: top;
-            width: 5.5rem;
-            height: 1.1rem;
-            padding: 0;
-            font-size: .2933333333333rem;
-            color: white;
             text-align: center;
-            /*text-shadow: 0 .013333333rem .026666667rem rgba(0, 0, 0, 0.25);*/
-            border: 0;
-            /*border-bottom: .0266666666667rem solid #33ccff;*/
-            /*border-radius: .0666666667rem;*/
-            cursor: pointer;
-            /*-webkit-box-shadow: inset 0 -.0266666666667rem #33ccff;*/
-            /*box-shadow: inset 0 -.026666666667rem #33ccff;*/
-            background-image: linear-gradient(164deg,
-            #60dafe 0%,
-            #41bcf5 100%);
-            background-color: #3a74f2;
-            box-shadow:0 3px 12px #3c9af2;
-            opacity: 0.8;
-            border-radius: 0.55rem;
         }
         .biaoti {
             margin-top: 3.175rem;
@@ -112,25 +85,146 @@
             letter-spacing: 0.056rem;
             color: #2e2e2e;
         }
+        .bg-gradient1 span,
+        .bg-gradient1:before {
+            background: #52A0FD;
+            background: linear-gradient(to right, #52A0FD 0%, #00e2fa 80%, #00e2fa 100%);
+        }
+
+        .bg-gradient2 span,
+        .bg-gradient2:before {
+            background: #44ea76;
+            background: linear-gradient(to right, #44ea76 0%, #39fad7 80%, #39fad7 100%);
+        }
+
+        .bg-gradient3 span,
+        .bg-gradient3:before {
+            background: #fa6c9f;
+            background: linear-gradient(to right, #fa6c9f 0%, #ffe140 80%, #ffe140 100%);
+        }
+
+        /* General */
+        .wrapper {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            margin-top: 59px;
+        }
+        a:hover, a:focus, a:active {
+            text-decoration: none;
+        }
+
+        /* fancy Button */
+        .fancy-button {
+            display: inline-block;
+            /*margin: 30px;*/
+            font-family: PingFangSC-Regular, Microsoft YaHei UI;
+            font-size: 18px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: #ffffff;
+            position: relative;
+        }
+        .fancy-button:before {
+            content: '';
+            display: inline-block;
+            height: 16px;
+            position: absolute;
+            bottom: -5px;
+            left: 27px;
+            right: 27px;
+            z-index: -1;
+            border-radius: 30em;
+            -webkit-filter: blur(16px) brightness(0.95);
+            filter: blur(20px) brightness(0.95);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease-out;
+        }
+        .fancy-button i {
+            margin-top: -1px;
+            margin-right: 20px;
+            font-size: 1.265em;
+            vertical-align: middle;
+        }
+        .fancy-button span {
+            display: inline-block;
+            padding: 8px 87px;
+            border-radius: 50em;
+            position: relative;
+            z-index: 2;
+            will-change: transform, filter;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease-out;
+        }
+        .fancy-button:focus, .fancy-button:active {
+            color: #ffffff;
+        }
+        .fancy-button:hover {
+            color: #ffffff;
+        }
+        .fancy-button:hover span {
+            -webkit-filter: brightness(1.05) contrast(1.05);
+            filter: brightness(1.05) contrast(1.05);
+            -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+        .fancy-button:hover:before {
+            bottom: 0;
+            -webkit-filter: blur(10px) brightness(0.95);
+            filter: blur(10px) brightness(0.95);
+        }
+        .fancy-button.pop-onhover:before {
+            opacity: 0;
+            bottom: 10px;
+        }
+        .fancy-button.pop-onhover:hover:before {
+            bottom: -7px;
+            opacity: 1;
+            -webkit-filter: blur(20px);
+            filter: blur(20px);
+        }
+        .fancy-button.pop-onhover:hover span {
+            -webkit-transform: scale(1.04);
+            transform: scale(1.04);
+        }
+        .fancy-button.pop-onhover:hover:active span {
+            -webkit-filter: brightness(1) contrast(1);
+            filter: brightness(1) contrast(1);
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            transition: all 0.15s ease-out;
+        }
+        .fancy-button.pop-onhover:hover:active:before {
+            bottom: 0;
+            -webkit-filter: blur(10px) brightness(0.95);
+            filter: blur(10px) brightness(0.95);
+            transition: all 0.2s ease-out;
+        }
     </style>
 </head>
 <body>
 <h1 style="text-align: center" class = "biaoti"><b>创建您的账号</b></h1>
 <form action="#" method="post" id="form1">
     <p class = "input-p">
-        <input type = "text" name = "username" class = "sign-up-input" placeholder = "    用户名" style = "border: none" maxlength="6">
-    </p>
-    <p><center><hr class = "line2"/></center></p>
-    <p><center><hr class = "line2"/></center></p>
+        <input type = "text" name = "username" class = "sign-up-input" placeholder = "用户名" onclick="this.placeholder=''" style = "background: transparent;border: none"></p>
+    <p class = "line2"/></p>
     <p class = "input-p">
-        <input type = "password" name = "password" class = "sign-up-input2" placeholder = "   输入密码" style = "border: none" maxlength="16">
-    </p>
-    <p><center><hr class = "line2"/></center></p>
-    <p><center><hr class = "line2"/></center></p>
+        <input type = "password" name = "password" class = "sign-up-input2" placeholder = "输入密码" onclick="this.placeholder=''" style = "background: transparent;border: none"></p>
+    <p class = "line2"/></p>
     <p class = "input-p">
-        <input type = "password" name = "password1" class = "sign-up-input2" placeholder = "   确认密码" style = "border: none" maxlength="16">
-    </p>
-    <p class = "input-p"><input type = "button" style = "font-size: 16px" class = "sign-up-login" value = "创建并登录" onclick="signup()"/></p>
+        <input type = "password" name = "password1" class = "sign-up-input2" placeholder = "确认密码" onclick="this.placeholder=''" style = "background: transparent;border: none"></p>
+    <!--<p class = "input-p"><input type = "button" style = "font-size: 16px" class = "sign-up-login" value = "创建并登录" onclick="signup()"/></p>-->
+    <div class="wrapper">
+        <button class="fancy-button bg-gradient1" style="margin-top:2.05rem;background: transparent;border: none;">
+            <span style="letter-spacing: 0.119rem;padding: 11px 60px;">
+                创建并登录
+            </span>
+        </button>
+    </div>
 </form>
 <script>
 function signup() {
