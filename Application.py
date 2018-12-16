@@ -392,7 +392,8 @@ def consign_collect(consign_id):
 @app.route('/add_collect/', methods=["GET"])
 @login_required
 def add_collect():
-    cursor = db.cursor()
+    DB_=pymysql.connect("localhost", "user", "user", "db1")
+    cursors = DB_.cursor()
     consign_id =str(request.args.get('consign_id'))
     if (consign_id[-1:]=='_'):
         consign_id = str(consign_id[:-1])
@@ -402,10 +403,11 @@ def add_collect():
     print("consign_id=%s,user_id=%s"%(consign_id,user_id))
     sql = "select * from collects where user_id='%s' and consign_id='%s'"\
           % (user_id, consign_id)
-    db.ping(reconnect=True)
-    results = cursor.execute(sql)
+    DB_.ping(reconnect=True)
+    results = cursors.execute(sql)
     if results:
-        cursor.close()
+        cursors.close()
+        DB_.close()
         return jsonify({
             "status": 0,
             "message": "该委托已被收藏！"
@@ -414,16 +416,18 @@ def add_collect():
         sql = """INSERT INTO collects(user_id,consign_id)
                              VALUES ('%s', '%s')""" % (user_id, consign_id)
         try:
-            cursor.execute(sql)
-            db.commit()
-            cursor.close()
+            cursors.execute(sql)
+            DB_.commit()
+            cursors.close()
+            DB_.close()
             return jsonify({
                 "status": 1,
                 "message": "添加成功！"
             })
         except:
-            # db.rollback()
-            cursor.close()
+            db.rollback()
+            cursors.close()
+            DB_.close()
             return jsonify({
                 "status": 0,
                 "message": "添加错误！"
@@ -441,11 +445,12 @@ def collect():
 @app.route('/get_collect', methods=["GET"])
 @login_required
 def get_collect():
-    cursor = db.cursor()
+    db2=pymysql.connect("localhost", "user", "user", "db1")
+    cursor = db2.cursor()
     user_id = session.get('user_id')
     print("user_id")
     sql = "select * from collects where user_id='%s'" % (user_id)
-    db.ping(reconnect=True)
+    db2.ping(reconnect=True)
     results = cursor.execute(sql)
     output = []
     if results:
@@ -472,9 +477,11 @@ def get_collect():
             else:
                 continue
         cursor.close()
+        db2.close()
         return jsonify(output)
     else:
         cursor.close()
+        db2.close()
         return jsonify(output)
 
 
@@ -572,10 +579,11 @@ def Search(search_str):
 @app.route('/newest_consign', methods=["GET"])
 @login_required
 def new_consign():
-    cursor = db.cursor()
+    new_DB = pymysql.connect("localhost", "user", "user", "db1")
+    cursor = new_DB.cursor()
     user_id = session.get('user_id')
     sql = "select * from consigns where finished='0' order by `time` desc limit 12"
-    db.ping(reconnect=True)
+    new_DB.ping(reconnect=True)
     cursor.execute(sql)
     results = cursor.fetchall()
     output = []
@@ -595,6 +603,7 @@ def new_consign():
             cache['collected'] = 0
         output.append(cache)
     cursor.close()
+    new_DB.close()
     return jsonify(output)
 
 

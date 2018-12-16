@@ -201,12 +201,13 @@
     </style>
     <meta content="width=320px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
     <script src="static/js/jquery-2.1.1.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <div class="rectangle">
     <span><a href="/index"><img class="the_right" src="static/imgs/右边.svg"></a></span>
 </div>
-<form action="/consign" method="post">
+<form action="#" method="post" id="form1">
     <div>
         <span class="head"><input cols="1" id="content" maxlength="12" name="consign_name" onkeyup="javascript:checkWords(this);"
                                   onmousedown="javascript:checkWords(this);" placeholder="     请输入标题(十二字内)" rows="1"
@@ -241,7 +242,7 @@
         </div>
     </div>
     <div class="sub">
-      <input type="submit" value="提 交">
+      <input type="button" value="提 交" onclick="login()">
     </div>
 </form>
 
@@ -333,5 +334,26 @@
         c.setAttribute("src", "static/imgs/二手交易x.svg");
     }
 </script>
+<script>
+function login() {
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/consign" ,//url
+                data: $('#form1').serialize(),
+                success: function (result) {
+                    alert(result.message);//打印服务端返回的数据(调试用)
+                    if (result.resultCode == 200) {
+                    }
+
+                    ;
+                },
+                error : function() {
+                     location.href='/index'
+                }
+            });
+        }
+        </script>
 </body>
 </html>
